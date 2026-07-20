@@ -2,10 +2,9 @@ import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import Reveal from './Reveal.jsx'
 
-// TODO: paste your real EmailJS keys here (dashboard.emailjs.com)
-const SERVICE_ID = 'YOUR_SERVICE_ID'
-const TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const PUBLIC_KEY = 'YOUR_PUBLIC_KEY'
+const SERVICE_ID = 'service_3o04ar1'
+const TEMPLATE_ID = 'template_v3sej96'
+const PUBLIC_KEY = 'C_whB4tAE2ZQWGiHA'
 
 function Contact() {
   const formRef = useRef(null)
