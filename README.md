@@ -1,6 +1,8 @@
 # Otabek — Web Developer Portfolio
 
-A fast, single-page portfolio site built with React + Vite, Framer Motion, and a working booking/contact form powered by EmailJS (no backend server needed).
+A fast, single-page portfolio site built with React + Vite, Framer Motion, and a working booking/contact form powered by EmailJS (no backend server needed). Dark purple-neon design with a fixed sidebar nav.
+
+**Live:** [otabekmamadaliev.com](https://otabekmamadaliev.com) (also at [otabekmamadaliev.vercel.app](https://otabekmamadaliev.vercel.app))
 
 ## Run locally
 
@@ -18,38 +20,40 @@ npm run build
 npm run preview   # serves the built site locally
 ```
 
-## Connect EmailJS (make the contact form work)
+## EmailJS (the contact form)
 
-The form sends submissions straight to your inbox via [EmailJS](https://www.emailjs.com/) — frontend-only, no server.
+The booking form sends submissions straight to the inbox via [EmailJS](https://www.emailjs.com/) — frontend-only, no server. **It's already connected** — the live keys are in [src/components/Contact.jsx](src/components/Contact.jsx).
+
+If you ever need to reconnect it to a different account, redo these steps and replace the three constants at the top of that file (`SERVICE_ID`, `TEMPLATE_ID`, `PUBLIC_KEY`):
 
 1. **Create an account** at [emailjs.com](https://www.emailjs.com/) (free tier is fine).
-2. **Add an email service**: Dashboard → *Email Services* → *Add New Service* → choose **Gmail** and connect your account. Note the **Service ID**.
-3. **Create a template**: Dashboard → *Email Templates* → *Create New Template*. In the template body/fields, use these variables (they match the form field names):
+2. **Add an email service**: Dashboard → *Email Services* → *Add New Service* → choose **Gmail** and connect. Note the **Service ID**.
+3. **Create a template**: Dashboard → *Email Templates* → *Create New Template*. Use these variables (they match the form field names), and set `{{reply_to}}` as the template's Reply-To so replies go straight to the visitor:
    - `{{from_name}}` — the visitor's name
-   - `{{reply_to}}` — the visitor's email (set this as the template's Reply-To so you can reply directly)
+   - `{{reply_to}}` — the visitor's email
    - `{{preferred_time}}` — their preferred call time
    - `{{message}}` — what they need built
 
    Note the **Template ID**.
 4. **Get your Public Key**: Dashboard → *Account* → *General* → **Public Key**.
-5. **Paste the three values** into [src/components/Contact.jsx](src/components/Contact.jsx) at the top:
+5. Paste the three values into [src/components/Contact.jsx](src/components/Contact.jsx) and test — you should receive an email within seconds.
 
-   ```js
-   const SERVICE_ID = 'YOUR_SERVICE_ID'
-   const TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-   const PUBLIC_KEY = 'YOUR_PUBLIC_KEY'
-   ```
+> Note: these three IDs are client-side by design (they ship in the browser bundle). They only permit "send this one template to the site owner's inbox," so committing them is fine.
 
-6. Test the form — you should receive an email within seconds.
+## Deploy
 
-## Deploy to Vercel
+Hosted on **Vercel**, connected to this repo — **every push to `main` auto-deploys**. To reproduce from scratch:
 
 1. Push this repo to GitHub.
-2. Go to [vercel.com](https://vercel.com/) → *Add New Project* → import the repo.
-3. Vercel auto-detects Vite — the defaults are correct (build command `npm run build`, output directory `dist`). Click **Deploy**.
-4. Done. Every push to the main branch redeploys automatically.
+2. [vercel.com](https://vercel.com/) → *Add New Project* → import the repo. Vercel auto-detects Vite (build `npm run build`, output `dist`). Click **Deploy**.
 
-Alternatively, from the terminal: `npm i -g vercel && vercel`.
+### Custom domain (otabekmamadaliev.com)
+
+The domain is registered on **Cloudflare** and connected to Vercel:
+
+1. In Vercel: *Project → Settings → Domains* → add `otabekmamadaliev.com` (with "redirect apex to www").
+2. In Cloudflare DNS, add the two records Vercel shows — both **CNAME** (`@` and `www`) pointing to Vercel's target, each set to **DNS only** (grey cloud, **not** proxied — Cloudflare proxying conflicts with Vercel's SSL).
+3. Vercel verifies and issues SSL automatically within a few minutes.
 
 ## Tech
 
