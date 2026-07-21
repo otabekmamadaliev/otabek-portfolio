@@ -1,24 +1,28 @@
 import { MotionConfig } from 'framer-motion'
-import Nav from './components/Nav.jsx'
+import Sidebar from './components/Sidebar.jsx'
 import Hero from './components/Hero.jsx'
-import About from './components/About.jsx'
+import Projects from './components/Projects.jsx'
 import Skills from './components/Skills.jsx'
-import Project from './components/Project.jsx'
+import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 
 function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Project />
-        <Contact />
-      </main>
-      <Footer />
+      <div className="shell">
+        <Sidebar />
+        <div className="content">
+          <main>
+            <Hero />
+            <Projects />
+            <Skills />
+            <About />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
+      </div>
     </MotionConfig>
   )
 }
