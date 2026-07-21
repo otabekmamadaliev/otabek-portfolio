@@ -59,6 +59,21 @@ function BuildLog() {
   )
 }
 
+function NeonScene() {
+  return (
+    <div className="scene">
+      <div className="scene-frame" aria-hidden="true" />
+      <span className="scene-sign" aria-hidden="true">
+        CODE · SHIP · IMPACT
+      </span>
+      <span className="cube cube-1" aria-hidden="true" />
+      <span className="cube cube-2" aria-hidden="true" />
+      <span className="cube cube-3" aria-hidden="true" />
+      <BuildLog />
+    </div>
+  )
+}
+
 const item = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
@@ -67,6 +82,7 @@ const item = {
 function Hero() {
   return (
     <section className="hero" id="top">
+      <div className="hero-bg" aria-hidden="true" />
       <div className="container hero-grid">
         <motion.div
           initial="hidden"
@@ -74,12 +90,12 @@ function Hero() {
           variants={{ show: { transition: { staggerChildren: 0.12 } } }}
         >
           <motion.p className="eyebrow" variants={item}>
-            Web Developer
+            Portfolio
           </motion.p>
           <motion.h1 className="hero-headline" variants={item}>
             Fast, reliable web apps.
             <br />
-            <span className="gold">Built end-to-end.</span>
+            <span className="accent">Built end-to-end.</span>
           </motion.h1>
           <motion.p className="hero-sub" variants={item}>
             I build web apps and sites using modern AI-assisted development —
@@ -87,12 +103,16 @@ function Hero() {
             requirements to a tested, working product.
           </motion.p>
           <motion.div className="hero-actions" variants={item}>
-            <a className="btn btn-gold" href="#project">
+            <a className="btn btn-primary" href="#projects">
               View my work
             </a>
             <a className="btn btn-ghost" href="#contact">
               Book a call
             </a>
+          </motion.div>
+          <motion.div className="hero-note" variants={item}>
+            <span className="pulse" />
+            Building ideas into working products
           </motion.div>
         </motion.div>
         <motion.div
@@ -100,7 +120,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35, ease: 'easeOut' }}
         >
-          <BuildLog />
+          <NeonScene />
         </motion.div>
       </div>
     </section>
