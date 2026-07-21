@@ -28,15 +28,32 @@ function Contact() {
     <section className="section" id="contact">
       <div className="container">
         <Reveal>
+          <div className="cta-banner">
+            <div>
+              <h3>Let&apos;s Build Something Great Together</h3>
+              <p>Have a project in mind? Let&apos;s talk!</p>
+            </div>
+            <a className="btn btn-primary" href="#contact-form">
+              Get in Touch ↓
+            </a>
+          </div>
+        </Reveal>
+        <Reveal>
           <p className="eyebrow">Contact</p>
           <h2 className="section-title">Book a call</h2>
+          <span className="title-underline" aria-hidden="true" />
           <p className="contact-intro">
             Tell me what you need built and when you&apos;re free to talk.
             Your request lands in my inbox and I&apos;ll reply by email.
           </p>
         </Reveal>
         <Reveal delay={0.1}>
-          <form className="contact-form" ref={formRef} onSubmit={handleSubmit}>
+          <form
+            className="contact-form"
+            id="contact-form"
+            ref={formRef}
+            onSubmit={handleSubmit}
+          >
             <div className="field">
               <label htmlFor="from_name">Name *</label>
               <input
@@ -78,7 +95,7 @@ function Contact() {
             </div>
             <div className="form-footer">
               <button
-                className="btn btn-gold"
+                className="btn btn-primary"
                 type="submit"
                 disabled={status === 'sending'}
               >
