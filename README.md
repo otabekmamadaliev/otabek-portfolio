@@ -38,7 +38,7 @@ If you ever need to reconnect it to a different account, redo these steps and re
 4. **Get your Public Key**: Dashboard → *Account* → *General* → **Public Key**.
 5. Paste the three values into [src/components/Contact.jsx](src/components/Contact.jsx) and test — you should receive an email within seconds.
 
-> Note: these three IDs are client-side by design (they ship in the browser bundle). They only permit "send this one template to the site owner's inbox," so committing them is fine.
+> Note: these three IDs are public identifiers, not secrets — they ship in the browser bundle, so committing them is expected. To stop them being reused to spam the inbox from other sites, restrict allowed origins in EmailJS (*Account → Security → Allowed origins*) and rotate the public key if it's ever abused.
 
 ## Deploy
 
@@ -52,7 +52,7 @@ Hosted on **Vercel**, connected to this repo — **every push to `main` auto-dep
 The domain is registered on **Cloudflare** and connected to Vercel:
 
 1. In Vercel: *Project → Settings → Domains* → add `otabekmamadaliev.com` (with "redirect apex to www").
-2. In Cloudflare DNS, add the two records Vercel shows — both **CNAME** (`@` and `www`) pointing to Vercel's target, each set to **DNS only** (grey cloud, **not** proxied — Cloudflare proxying conflicts with Vercel's SSL).
+2. In Cloudflare DNS, add the two records Vercel shows — both **CNAME** (`@` and `www`) pointing to Vercel's target, each set to **DNS only** (grey cloud). Cloudflare's proxy can interfere with Vercel's automatic SSL and redirects, so DNS-only is the setup [Vercel recommends](https://vercel.com/docs/projects/domains) — leave proxying off unless you know you need it and have configured Cloudflare SSL to match.
 3. Vercel verifies and issues SSL automatically within a few minutes.
 
 ## Tech
