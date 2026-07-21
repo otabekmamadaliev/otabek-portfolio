@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const STEPS = ['Understand', 'Build', 'Test', 'Ship']
 
@@ -7,20 +7,21 @@ const STEP_DURATION = 1400
 const LOOP_PAUSE = 2200
 
 function BuildLog() {
-  const reduceMotion = useReducedMotion()
-  // current = index of the step in progress; STEPS.length means all done
+  // current = index of the step in progress; STEPS.length means all done.
+  // This decorative terminal loops for everyone; unlike the scroll/stagger
+  // animations, it intentionally ignores prefers-reduced-motion — the motion
+  // is gentle (sequential reveals) and it's the hero's signature element.
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    if (reduceMotion) return
     const delay = current === STEPS.length ? LOOP_PAUSE : STEP_DURATION
     const timer = setTimeout(() => {
       setCurrent((c) => (c === STEPS.length ? 0 : c + 1))
     }, delay)
     return () => clearTimeout(timer)
-  }, [current, reduceMotion])
+  }, [current])
 
-  const shown = reduceMotion ? STEPS.length : current
+  const shown = current
 
   return (
     <div className="buildlog" aria-hidden="true">
