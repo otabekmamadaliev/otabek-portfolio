@@ -144,7 +144,11 @@ a {
   margin-top: auto;
   display: grid;
   gap: 18px;
-  justify-items: start;
+  justify-items: center;
+}
+
+.sidebar-footer .btn {
+  width: 100%;
 }
 
 .social-row {
