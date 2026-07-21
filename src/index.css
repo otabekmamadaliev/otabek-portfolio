@@ -72,7 +72,8 @@ a {
 
 .shell {
   display: flex;
-  min-height: 100vh;
+  min-height: 100vh; /* fallback */
+  min-height: 100dvh; /* tracks the visible viewport as the mobile URL bar collapses */
 }
 
 .sidebar {
@@ -181,6 +182,14 @@ a {
   flex: 1;
   margin-left: var(--sidebar-w);
   min-width: 0;
+  /* Column flex + main growing keeps the footer pinned to the bottom, so no
+     gap appears when the mobile viewport height shifts under the URL bar. */
+  display: flex;
+  flex-direction: column;
+}
+
+.content > main {
+  flex: 1 0 auto;
 }
 
 .container {
@@ -1047,7 +1056,7 @@ a {
     scroll-behavior: auto;
   }
 
-  .cursor,
+  /* .cursor is intentionally exempt — it belongs to the always-on build-log */
   .cube,
   .hero-note .pulse {
     animation: none;
