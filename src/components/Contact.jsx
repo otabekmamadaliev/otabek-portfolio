@@ -1,12 +1,15 @@
 import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import Reveal from './Reveal.jsx'
+import { useLang } from '../i18n/lang.jsx'
 
 const SERVICE_ID = 'service_3o04ar1'
 const TEMPLATE_ID = 'template_v3sej96'
 const PUBLIC_KEY = 'C_whB4tAE2ZQWGiHA'
+const CONTACT_EMAIL = 'contact@otabekmamadaliev.com'
 
 function Contact() {
+  const { t } = useLang()
   const formRef = useRef(null)
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
 
@@ -30,22 +33,19 @@ function Contact() {
         <Reveal>
           <div className="cta-banner">
             <div>
-              <h3>Let&apos;s Build Something Great Together</h3>
-              <p>Have a project in mind? Let&apos;s talk!</p>
+              <h3>{t.cta.title}</h3>
+              <p>{t.cta.subtitle}</p>
             </div>
             <a className="btn btn-primary" href="#contact-form">
-              Get in Touch ↓
+              {t.cta.button} ↓
             </a>
           </div>
         </Reveal>
         <Reveal>
-          <p className="eyebrow">Contact</p>
-          <h2 className="section-title">Book a call</h2>
+          <p className="eyebrow">{t.contact.eyebrow}</p>
+          <h2 className="section-title">{t.contact.title}</h2>
           <span className="title-underline" aria-hidden="true" />
-          <p className="contact-intro">
-            Tell me what you need built and when you&apos;re free to talk.
-            Your request lands in my inbox and I&apos;ll reply by email.
-          </p>
+          <p className="contact-intro">{t.contact.intro}</p>
         </Reveal>
         <Reveal delay={0.1}>
           <form
@@ -55,41 +55,41 @@ function Contact() {
             onSubmit={handleSubmit}
           >
             <div className="field">
-              <label htmlFor="from_name">Name *</label>
+              <label htmlFor="from_name">{t.contact.name} *</label>
               <input
                 id="from_name"
                 name="from_name"
                 type="text"
-                placeholder="Your name"
+                placeholder={t.contact.namePlaceholder}
                 required
               />
             </div>
             <div className="field">
-              <label htmlFor="reply_to">Email *</label>
+              <label htmlFor="reply_to">{t.contact.email} *</label>
               <input
                 id="reply_to"
                 name="reply_to"
                 type="email"
-                placeholder="you@company.com"
+                placeholder={t.contact.emailPlaceholder}
                 required
               />
             </div>
             <div className="field field-full">
-              <label htmlFor="preferred_time">Preferred date / time</label>
+              <label htmlFor="preferred_time">{t.contact.time}</label>
               <input
                 id="preferred_time"
                 name="preferred_time"
                 type="text"
-                placeholder="e.g. Tuesday afternoon (CET)"
+                placeholder={t.contact.timePlaceholder}
               />
             </div>
             <div className="field field-full">
-              <label htmlFor="message">What do you need built? *</label>
+              <label htmlFor="message">{t.contact.message} *</label>
               <textarea
                 id="message"
                 name="message"
                 rows="5"
-                placeholder="A short description of your project…"
+                placeholder={t.contact.messagePlaceholder}
                 required
               />
             </div>
@@ -99,20 +99,17 @@ function Contact() {
                 type="submit"
                 disabled={status === 'sending'}
               >
-                {status === 'sending' ? 'Sending…' : 'Send request'}
+                {status === 'sending' ? t.contact.sending : t.contact.send}
               </button>
               {status === 'sent' && (
                 <p className="form-msg success" role="status">
-                  Request sent. I&apos;ll reply to your email shortly.
+                  {t.contact.success}
                 </p>
               )}
               {status === 'error' && (
                 <p className="form-msg error" role="alert">
-                  Something went wrong — please email me directly at{' '}
-                  <a href="mailto:otabekmamadaliyev09@gmail.com">
-                    otabekmamadaliyev09@gmail.com
-                  </a>
-                  .
+                  {t.contact.errorPrefix}
+                  <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
                 </p>
               )}
             </div>

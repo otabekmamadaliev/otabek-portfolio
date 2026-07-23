@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-
-const STEPS = ['Understand', 'Build', 'Test', 'Ship']
+import { useLang } from '../i18n/lang.jsx'
 
 const STEP_DURATION = 1400
 const LOOP_PAUSE = 2200
 
 function BuildLog() {
-  // current = index of the step in progress; STEPS.length means all done.
-  // This decorative terminal loops for everyone; unlike the scroll/stagger
-  // animations, it intentionally ignores prefers-reduced-motion — the motion
-  // is gentle (sequential reveals) and it's the hero's signature element.
+  const { t } = useLang()
+  const steps = t.buildlog.steps
+  // current = index of the step in progress; steps.length means all done.
+  // This decorative terminal loops for everyone (ignores prefers-reduced-motion)
+  // — the motion is gentle and it's the hero's signature element.
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    const delay = current === STEPS.length ? LOOP_PAUSE : STEP_DURATION
+    const delay = current === steps.length ? LOOP_PAUSE : STEP_DURATION
     const timer = setTimeout(() => {
-      setCurrent((c) => (c === STEPS.length ? 0 : c + 1))
+      setCurrent((c) => (c === steps.length ? 0 : c + 1))
     }, delay)
     return () => clearTimeout(timer)
-  }, [current])
+  }, [current, steps.length])
 
-  const shown = current
+  const shown = Math.min(current, steps.length)
 
   return (
     <div className="buildlog" aria-hidden="true">
@@ -32,12 +32,12 @@ function BuildLog() {
         <span className="buildlog-title">build-log — otabek@dev</span>
       </div>
       <div className="buildlog-body">
-        {STEPS.map((step, i) => {
+        {steps.map((step, i) => {
           const done = i < shown
           const active = i === shown
           return (
             <div
-              key={step}
+              key={i}
               className={`buildlog-step ${done ? 'done' : ''} ${active ? 'active' : ''}`}
             >
               <span className="step-icon">{done ? '✓' : active ? '›' : ''}</span>
@@ -49,10 +49,12 @@ function BuildLog() {
           )
         })}
         <div className="buildlog-status">
-          {shown === STEPS.length ? (
-            <span className="ok">✓ delivered — starting next project…</span>
+          {shown === steps.length ? (
+            <span className="ok">{t.buildlog.delivered}</span>
           ) : (
-            <span>running: {STEPS[shown].toLowerCase()}…</span>
+            <span>
+              {t.buildlog.running} {steps[shown].toLowerCase()}…
+            </span>
           )}
         </div>
       </div>
@@ -81,6 +83,7 @@ const item = {
 }
 
 function Hero() {
+  const { t } = useLang()
   return (
     <section className="hero" id="top">
       <div className="hero-bg" aria-hidden="true" />
@@ -91,29 +94,27 @@ function Hero() {
           variants={{ show: { transition: { staggerChildren: 0.12 } } }}
         >
           <motion.p className="eyebrow" variants={item}>
-            Portfolio
+            {t.hero.eyebrow}
           </motion.p>
           <motion.h1 className="hero-headline" variants={item}>
-            Fast, reliable web apps.
+            {t.hero.headline1}
             <br />
-            <span className="accent">Built end-to-end.</span>
+            <span className="accent">{t.hero.headline2}</span>
           </motion.h1>
           <motion.p className="hero-sub" variants={item}>
-            I build web apps and sites using modern AI-assisted development —
-            fast turnaround without sacrificing code quality. From your
-            requirements to a tested, working product.
+            {t.hero.sub}
           </motion.p>
           <motion.div className="hero-actions" variants={item}>
             <a className="btn btn-primary" href="#projects">
-              View my work
+              {t.hero.viewWork}
             </a>
             <a className="btn btn-ghost" href="#contact">
-              Book a call
+              {t.hero.bookCall}
             </a>
           </motion.div>
           <motion.div className="hero-note" variants={item}>
             <span className="pulse" />
-            Building ideas into working products
+            {t.hero.note}
           </motion.div>
         </motion.div>
         <motion.div
