@@ -36,9 +36,9 @@ export const translations = {
       items: [
         {
           status: '01 // Live',
-          artLabel: 'Book. Meet. Build.',
-          title: 'Booking & Scheduling System',
-          desc: 'The booking pipeline powering this site — validated React form, EmailJS delivery straight to my inbox, no backend. Currently being expanded into a standalone scheduling app.',
+          artLabel: 'Real dates. Real rooms.',
+          title: 'AURELIA — Hotel Booking System',
+          desc: 'A boutique hotel booking demo built on a real availability engine: seeded reservations block specific nights per room, no two stays can hold the same room, and the price follows the dates you pick. Confirmation emails via EmailJS, reservations kept between visits.',
         },
         {
           status: '02 // In planning',
@@ -133,9 +133,9 @@ export const translations = {
       items: [
         {
           status: '01 // Jonli',
-          artLabel: 'Bron. Uchrashuv. Yaratish.',
-          title: 'Bron va rejalashtirish tizimi',
-          desc: "Ushbu saytni ishlatayotgan bron tizimi — tekshirilgan React forma, EmailJS orqali to'g'ridan-to'g'ri pochtamga yetkazish, backendsiz. Hozirda alohida rejalashtirish ilovasiga kengaytirilmoqda.",
+          artLabel: 'Haqiqiy sanalar. Haqiqiy xonalar.',
+          title: 'AURELIA — mehmonxona bron tizimi',
+          desc: "Butik mehmonxona uchun bron demosi, haqiqiy bandlik mexanizmi asosida: oldindan kiritilgan bronlar har bir xonaning aniq kechalarini band qiladi, bitta xonani ikki marta bron qilib bo'lmaydi, narx esa tanlangan sanalarga qarab hisoblanadi. EmailJS orqali tasdiq xatlari, bronlar tashriflar orasida saqlanadi.",
         },
         {
           status: '02 // Rejada',
@@ -230,9 +230,9 @@ export const translations = {
       items: [
         {
           status: '01 // Na żywo',
-          artLabel: 'Rezerwuj. Spotkaj. Twórz.',
-          title: 'System rezerwacji i planowania',
-          desc: 'System rezerwacji napędzający tę stronę — zweryfikowany formularz React, dostarczanie przez EmailJS prosto na moją skrzynkę, bez backendu. Obecnie rozwijany w samodzielną aplikację do planowania.',
+          artLabel: 'Prawdziwe daty. Prawdziwe pokoje.',
+          title: 'AURELIA — system rezerwacji hotelu',
+          desc: 'Demo rezerwacji butikowego hotelu oparte na prawdziwym silniku dostępności: wstępnie wprowadzone rezerwacje blokują konkretne noce w danym pokoju, dwa pobyty nigdy nie zajmą tego samego pokoju, a cena wynika z wybranych dat. Potwierdzenia przez EmailJS, rezerwacje zapamiętywane między wizytami.',
         },
         {
           status: '02 // W planach',
@@ -327,9 +327,9 @@ export const translations = {
       items: [
         {
           status: '01 // Онлайн',
-          artLabel: 'Бронь. Встреча. Работа.',
-          title: 'Система бронирования и записи',
-          desc: 'Система бронирования, работающая на этом сайте — проверенная форма на React, доставка через EmailJS прямо на мою почту, без бэкенда. Сейчас развивается в отдельное приложение для записи.',
+          artLabel: 'Реальные даты. Реальные номера.',
+          title: 'AURELIA — система бронирования отеля',
+          desc: 'Демо бронирования бутик-отеля на настоящем движке доступности: заранее заведённые брони закрывают конкретные ночи в каждом номере, две поездки никогда не займут один номер, а цена считается по выбранным датам. Подтверждения через EmailJS, брони сохраняются между визитами.',
         },
         {
           status: '02 // В планах',
