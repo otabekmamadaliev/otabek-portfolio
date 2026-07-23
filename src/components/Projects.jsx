@@ -3,7 +3,12 @@ import { useLang } from '../i18n/lang.jsx'
 
 // Visual/structural config per project; translatable text comes from i18n by index.
 const META = [
-  { art: 'art-violet', tags: ['React', 'Vite', 'EmailJS'], href: '#contact' },
+  {
+    art: 'art-violet',
+    tags: ['React', 'Vite', 'EmailJS'],
+    href: 'https://aurelia-booking.vercel.app',
+    external: true,
+  },
   { art: 'art-indigo', tags: ['TBA'] },
   { art: 'art-magenta', tags: ['TBA'] },
 ]
@@ -32,7 +37,11 @@ function ProjectCard({ meta, content }) {
   )
 
   return meta.href ? (
-    <a className="project-card" href={meta.href}>
+    <a
+      className="project-card"
+      href={meta.href}
+      {...(meta.external && { target: '_blank', rel: 'noreferrer' })}
+    >
       {card}
     </a>
   ) : (
