@@ -1,30 +1,21 @@
 import Reveal from './Reveal.jsx'
+import { useLang } from '../i18n/lang.jsx'
 
 function About() {
+  const { t } = useLang()
   return (
     <section className="section" id="about">
       <div className="container">
         <Reveal>
-          <p className="eyebrow">About</p>
-          <h2 className="section-title">The Developer Behind the Code</h2>
+          <p className="eyebrow">{t.about.eyebrow}</p>
+          <h2 className="section-title">{t.about.title}</h2>
           <span className="title-underline" aria-hidden="true" />
         </Reveal>
         <div className="about-grid">
           <Reveal delay={0.1}>
             <div className="about-body">
-              <p>
-                I&apos;m a final-year Software Engineering student based in
-                Poland. I work with AI-assisted development, which means
-                I&apos;m not locked into one framework or stack — I pick the
-                right tools for your project and move fast without cutting
-                corners.
-              </p>
-              <p>
-                I handle the full process: understanding your requirements,
-                building, testing, and iterating until it works the way you
-                need. I communicate clearly, hit deadlines, and treat every
-                project like it&apos;s going to production — because it is.
-              </p>
+              <p>{t.about.p1}</p>
+              <p>{t.about.p2}</p>
             </div>
           </Reveal>
           <Reveal delay={0.2}>
@@ -34,7 +25,8 @@ function About() {
                 {'\n'}  passion: <span className="s">&apos;building&apos;</span>,
                 {'\n'}  focus: <span className="s">&apos;solutions&apos;</span>,
                 {'\n'}  goal: <span className="s">&apos;growth&apos;</span>,
-                {'\n'}{'}'};
+                {'\n'}
+                {'}'};
               </pre>
             </div>
           </Reveal>

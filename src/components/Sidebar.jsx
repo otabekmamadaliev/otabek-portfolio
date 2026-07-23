@@ -1,9 +1,12 @@
-const LINKS = [
-  { num: '01', label: 'Home', href: '#top' },
-  { num: '02', label: 'Projects', href: '#projects' },
-  { num: '03', label: 'Skills', href: '#skills' },
-  { num: '04', label: 'About', href: '#about' },
-  { num: '05', label: 'Contact', href: '#contact' },
+import { useLang } from '../i18n/lang.jsx'
+import LanguageSwitcher from './LanguageSwitcher.jsx'
+
+const NAV = [
+  { num: '01', key: 'home', href: '#top' },
+  { num: '02', key: 'projects', href: '#projects' },
+  { num: '03', key: 'skills', href: '#skills' },
+  { num: '04', key: 'about', href: '#about' },
+  { num: '05', key: 'contact', href: '#contact' },
 ]
 
 const SOCIALS = [
@@ -57,6 +60,7 @@ function SocialRow({ className }) {
 }
 
 function Sidebar() {
+  const { t } = useLang()
   return (
     <>
       <aside className="sidebar">
@@ -64,24 +68,26 @@ function Sidebar() {
           {'</>'}
         </a>
         <p className="sidebar-tagline">
-          Developer
-          <br />
-          Builder
-          <br />
-          Problem Solver
+          {t.sidebar.tagline.map((line, i) => (
+            <span key={i}>
+              {line}
+              {i < t.sidebar.tagline.length - 1 && <br />}
+            </span>
+          ))}
         </p>
         <nav className="sidebar-nav" aria-label="Main navigation">
-          {LINKS.map((link) => (
+          {NAV.map((link) => (
             <a key={link.num} className="sidebar-link" href={link.href}>
               <span className="num">{link.num}</span>
-              {link.label}
+              {t.nav[link.key]}
             </a>
           ))}
         </nav>
         <div className="sidebar-footer">
+          <LanguageSwitcher />
           <SocialRow className="social-row" />
           <a className="btn btn-primary btn-sm" href="#contact">
-            Book a Call
+            {t.bookCall}
           </a>
         </div>
       </aside>
@@ -90,9 +96,9 @@ function Sidebar() {
           {'</>'} OTABEK
         </a>
         <div className="topbar-right">
-          <SocialRow className="social-row" />
+          <LanguageSwitcher />
           <a className="btn btn-primary btn-sm" href="#contact">
-            Book a Call
+            {t.bookCall}
           </a>
         </div>
       </header>
