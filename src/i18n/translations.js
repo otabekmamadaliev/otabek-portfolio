@@ -41,10 +41,10 @@ export const translations = {
           desc: 'A boutique hotel booking demo built on a real availability engine: seeded reservations block specific nights per room, no two stays can hold the same room, and the price follows the dates you pick. Confirmation emails via EmailJS, reservations kept between visits.',
         },
         {
-          status: '02 // In planning',
-          artLabel: 'Coming Soon',
-          title: 'Project Two',
-          desc: 'The next full build is on the drawing board. It will be shipped end-to-end — from requirements to a tested, deployed product — and documented here.',
+          status: '02 // Live',
+          artLabel: 'Real cart. Real checkout.',
+          title: 'MiniStore — E-Commerce Store',
+          desc: 'A small online shop with real Stripe Checkout (test mode): a filterable product catalog, a cart that persists between visits, and checkout with home delivery or a scheduled store pickup. Card payments run server-side via a Vercel function, plus product pages, order tracking and a help centre.',
         },
         {
           status: '03 // In planning',
@@ -138,10 +138,10 @@ export const translations = {
           desc: "Butik mehmonxona uchun bron demosi, haqiqiy bandlik mexanizmi asosida: oldindan kiritilgan bronlar har bir xonaning aniq kechalarini band qiladi, bitta xonani ikki marta bron qilib bo'lmaydi, narx esa tanlangan sanalarga qarab hisoblanadi. EmailJS orqali tasdiq xatlari, bronlar tashriflar orasida saqlanadi.",
         },
         {
-          status: '02 // Rejada',
-          artLabel: 'Tez orada',
-          title: 'Ikkinchi loyiha',
-          desc: "Keyingi to'liq loyiha ishlab chiqilmoqda. U boshidan oxirigacha — talablardan tortib sinovdan o'tgan, joylashtirilgan mahsulotgacha — yaratiladi va shu yerda hujjatlashtiriladi.",
+          status: '02 // Jonli',
+          artLabel: "Haqiqiy savat. Haqiqiy to'lov.",
+          title: 'MiniStore — onlayn do‘kon',
+          desc: "Haqiqiy Stripe Checkout (sinov rejimi) bilan kichik onlayn do‘kon: filtrlanadigan mahsulotlar katalogi, tashriflar orasida saqlanadigan savat va yetkazib berish yoki belgilangan vaqtda do‘kondan olib ketish bilan to‘lov. Karta to‘lovlari Vercel funksiyasi orqali server tomonida amalga oshiriladi; mahsulot sahifalari, buyurtmani kuzatish va yordam markazi ham bor.",
         },
         {
           status: '03 // Rejada',
@@ -235,10 +235,10 @@ export const translations = {
           desc: 'Demo rezerwacji butikowego hotelu oparte na prawdziwym silniku dostępności: wstępnie wprowadzone rezerwacje blokują konkretne noce w danym pokoju, dwa pobyty nigdy nie zajmą tego samego pokoju, a cena wynika z wybranych dat. Potwierdzenia przez EmailJS, rezerwacje zapamiętywane między wizytami.',
         },
         {
-          status: '02 // W planach',
-          artLabel: 'Wkrótce',
-          title: 'Projekt drugi',
-          desc: 'Kolejny pełny projekt jest w przygotowaniu. Zostanie wykonany od początku do końca — od wymagań po przetestowany, wdrożony produkt — i udokumentowany tutaj.',
+          status: '02 // Na żywo',
+          artLabel: 'Prawdziwy koszyk. Prawdziwa płatność.',
+          title: 'MiniStore — sklep internetowy',
+          desc: 'Mały sklep online z prawdziwym Stripe Checkout (tryb testowy): filtrowany katalog produktów, koszyk zapamiętywany między wizytami oraz płatność z dostawą do domu lub odbiorem w sklepie w wybranym czasie. Płatności kartą obsługuje funkcja Vercel po stronie serwera; do tego strony produktów, śledzenie zamówień i centrum pomocy.',
         },
         {
           status: '03 // W planach',
@@ -332,10 +332,10 @@ export const translations = {
           desc: 'Демо бронирования бутик-отеля на настоящем движке доступности: заранее заведённые брони закрывают конкретные ночи в каждом номере, две поездки никогда не займут один номер, а цена считается по выбранным датам. Подтверждения через EmailJS, брони сохраняются между визитами.',
         },
         {
-          status: '02 // В планах',
-          artLabel: 'Скоро',
-          title: 'Второй проект',
-          desc: 'Следующий полноценный проект в разработке. Он будет создан под ключ — от требований до протестированного, развёрнутого продукта — и описан здесь.',
+          status: '02 // Онлайн',
+          artLabel: 'Настоящая корзина. Настоящая оплата.',
+          title: 'MiniStore — интернет-магазин',
+          desc: 'Небольшой интернет-магазин с настоящим Stripe Checkout (тестовый режим): каталог с фильтрами, корзина, сохраняющаяся между визитами, и оформление с доставкой или самовывозом из магазина в выбранное время. Оплата картой обрабатывается на сервере через функцию Vercel; плюс страницы товаров, отслеживание заказа и центр помощи.',
         },
         {
           status: '03 // В планах',
