@@ -9,7 +9,12 @@ const META = [
     href: 'https://aurelia-booking.vercel.app',
     external: true,
   },
-  { art: 'art-indigo', tags: ['TBA'] },
+  {
+    art: 'art-indigo',
+    tags: ['React', 'Vite', 'Stripe'],
+    href: 'https://mini-store-olive.vercel.app',
+    external: true,
+  },
   { art: 'art-magenta', tags: ['TBA'] },
 ]
 
