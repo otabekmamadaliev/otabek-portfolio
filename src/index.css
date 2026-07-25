@@ -662,38 +662,102 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
+  /* Fixed rows: a card that grows on hover overflows its row instead of
+     resizing it, so its neighbours never shift. */
+  grid-auto-rows: 430px;
+}
+
+/* The grid children are Reveal's motion.div wrappers, so the stretch has to be
+   passed down explicitly or the cards size to their content — which is why the
+   three cards used to be different heights. */
+.projects-grid > * {
+  height: 100%;
 }
 
 .project-card {
+  position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   transition:
-    transform 0.25s ease,
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.25s ease,
     box-shadow 0.25s ease;
 }
 
-.project-card:hover {
-  transform: translateY(-6px);
+.project-card:hover,
+.project-card:focus-visible {
   border-color: rgba(124, 92, 255, 0.5);
   box-shadow: var(--glow-md);
 }
 
 .project-art {
   position: relative;
-  height: 150px;
+  flex: 0 0 150px;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
+  transition: flex-basis 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-art .orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(28px);
+}
+
+/* ---- Preview layers: screenshot underneath, live site on top ---- */
+
+/* Deliberately oversized and top-anchored: the card crops it, and on hover we
+   slide it up so you see further down the page than a hero shot would show. */
+.project-shot,
+.project-live {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  transition:
+    transform 3.5s cubic-bezier(0.33, 0, 0.15, 1),
+    opacity 0.45s ease;
+}
+
+.project-shot {
+  height: auto;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0.9;
+}
+
+/* The iframe renders at a desktop width and is scaled down, so the preview is
+   the real desktop layout rather than the site's mobile breakpoint. */
+/* --preview-scale is measured from the card's real width by a ResizeObserver in
+   Projects.jsx; the fallback only matters for the frame before it's set. */
+.project-live {
+  width: 1280px;
+  height: 900px;
+  transform-origin: top left;
+  transform: scale(var(--preview-scale, 0.26));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.project-live.is-ready {
+  opacity: 1;
+}
+
+/* Keeps the label and body text legible over a screenshot of any brightness. */
+.project-scrim {
+  position: absolute;
+  inset: 0;
+  /* The three screenshots range from near-white to dark, so the middle stop has
+     to carry the label on its own rather than relying on the site behind it. */
+  background:
+    linear-gradient(180deg, rgba(10, 10, 22, 0.62) 0%, rgba(10, 10, 22, 0.42) 45%, rgba(10, 10, 22, 0.9) 100%);
+  transition: opacity 0.32s ease;
 }
 
 .art-violet {
@@ -743,9 +807,15 @@ a {
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--text);
-  text-shadow: 0 0 24px rgba(124, 92, 255, 0.6);
+  text-shadow:
+    0 0 24px rgba(124, 92, 255, 0.6),
+    0 2px 14px rgba(0, 0, 0, 0.7);
   padding: 0 20px;
   text-align: center;
+  /* Steps aside on hover so the preview underneath is unobstructed. */
+  transition:
+    opacity 0.28s ease,
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-body {
@@ -764,11 +834,115 @@ a {
   margin-bottom: 10px;
 }
 
+/* Clamping is what actually equalises the cards — the descriptions are
+   different lengths, so without it the tallest one sets the row. The full text
+   stays in the DOM for screen readers and is revealed on hover. */
 .project-desc {
   color: var(--text-secondary);
   font-size: 14.5px;
   margin-bottom: 18px;
-  flex: 1;
+  /* Deliberately NOT flex:1 — a stretched -webkit-box grows past the clamp and
+     paints the extra lines anyway, so you get an ellipsis mid-paragraph and
+     then more text after it. The meta row uses margin-top:auto to hold the
+     bottom instead. */
+  flex: 0 0 auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+}
+
+/* ---- Hover: grow, reveal the site, unclamp the text ----
+   Gated on real hover so touch devices get the full, static card instead of a
+   state they can never trigger. */
+@media (hover: hover) and (pointer: fine) {
+  .project-card {
+    /* Room for the unclamped description to expand into. */
+    will-change: transform, height;
+  }
+
+  /* Grows 40px up and 130px down. The row height is fixed, so this overflows
+     rather than reflowing; 130px is what fits in the margin below the grid
+     before the next section's first visible element. */
+  .project-card:hover,
+  .project-card:focus-visible {
+    height: calc(100% + 170px);
+    transform: translateY(-40px) scale(1.045);
+    z-index: 5;
+  }
+
+  /* More of the site on show, less chrome — but not so much that it starves
+     the description, which has to fit the longest project blurb unclamped. */
+  .project-card:hover .project-art,
+  .project-card:focus-visible .project-art {
+    flex-basis: 215px;
+  }
+
+  /* Pan down the screenshot so it reads as scrolling through the site. */
+  .project-card:hover .project-shot,
+  .project-card:focus-visible .project-shot {
+    transform: translateY(-38%);
+  }
+
+  .project-card:hover .project-scrim,
+  .project-card:focus-visible .project-scrim {
+    opacity: 0.45;
+  }
+
+  .project-card:hover .art-label,
+  .project-card:focus-visible .art-label {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  /* Drop the clamp entirely rather than raising it to a bigger number: line
+     counts that fit English clip Russian, and hand-tuning copy to fit pixels
+     breaks the next time anyone edits it. If a translation still overruns, it
+     scrolls instead of being cut off. */
+  .project-card:hover .project-desc,
+  .project-card:focus-visible .project-desc {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    /* Bounded here (unlike at rest) so a long translation scrolls inside the
+       card rather than overflowing it. */
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(124, 92, 255, 0.5) transparent;
+  }
+
+  .project-card .project-desc::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .project-card .project-desc::-webkit-scrollbar-thumb {
+    background: rgba(124, 92, 255, 0.5);
+    border-radius: 4px;
+  }
+}
+
+/* The card grows and the screenshot pans; with reduced motion neither should
+   move. The live preview still cross-fades — that's opacity, not motion. */
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-art,
+  .project-shot {
+    transition: opacity 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .project-card:hover,
+  .project-card:focus-visible {
+    transform: none;
+  }
+
+  .project-card:hover .project-shot,
+  .project-card:focus-visible .project-shot {
+    transform: none;
+  }
 }
 
 .project-meta {
@@ -778,6 +952,8 @@ a {
   gap: 12px;
   padding-top: 14px;
   border-top: 1px solid var(--border);
+  /* Pins the tag row to the bottom of the card in both states. */
+  margin-top: auto;
 }
 
 .project-tags {
@@ -1058,8 +1234,26 @@ a {
     padding-top: 150px;
   }
 
+  /* Single column: let each card size to its own content and show the whole
+     description, since there's no hover to reveal it. */
   .projects-grid {
     grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .project-card {
+    height: auto;
+  }
+
+  .project-art {
+    flex-basis: 190px;
+  }
+
+  .project-desc {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    display: block;
+    overflow: visible;
   }
 
   .skills-grid {
