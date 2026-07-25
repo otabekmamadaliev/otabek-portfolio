@@ -111,6 +111,15 @@ function Hero() {
             <a className="btn btn-ghost" href="#contact">
               {t.hero.bookCall}
             </a>
+            <a
+              className="btn btn-ghost"
+              href="/Otabek_Mamadaliev_CV.pdf"
+              download
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t.hero.downloadCv} ↓
+            </a>
           </motion.div>
           <motion.div className="hero-note" variants={item}>
             <span className="pulse" />
