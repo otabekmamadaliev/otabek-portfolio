@@ -15,7 +15,12 @@ const META = [
     href: 'https://mini-store-olive.vercel.app',
     external: true,
   },
-  { art: 'art-magenta', tags: ['TBA'] },
+  {
+    art: 'art-magenta',
+    tags: ['React', 'Vite', 'Gemini API'],
+    href: 'https://ai-support-widget-sand.vercel.app',
+    external: true,
+  },
 ]
 
 function ProjectCard({ meta, content }) {
