@@ -720,9 +720,7 @@ a {
   inset: 0;
   width: 100%;
   border: 0;
-  transition:
-    transform 3.5s cubic-bezier(0.33, 0, 0.15, 1),
-    opacity 0.45s ease;
+  transition: opacity 0.45s ease;
 }
 
 .project-shot {
@@ -877,12 +875,6 @@ a {
   .project-card:hover .project-art,
   .project-card:focus-visible .project-art {
     flex-basis: 215px;
-  }
-
-  /* Pan down the screenshot so it reads as scrolling through the site. */
-  .project-card:hover .project-shot,
-  .project-card:focus-visible .project-shot {
-    transform: translateY(-38%);
   }
 
   .project-card:hover .project-scrim,
@@ -1183,6 +1175,92 @@ a {
 .form-msg a {
   color: var(--neon);
   text-decoration: underline;
+}
+
+/* ---- Option chips ("what to build") + optional-field styling ---- */
+
+.field-hint {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  margin: -2px 0 4px;
+}
+
+.field label .opt {
+  color: var(--text-dim);
+}
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  cursor: pointer;
+}
+
+.chip input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.chip span::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1.5px solid var(--border-glow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+  transition: inherit;
+}
+
+.chip:hover span {
+  border-color: var(--border-glow);
+  color: var(--text);
+}
+
+.chip input:checked + span {
+  border-color: var(--violet);
+  background: rgba(124, 92, 255, 0.12);
+  color: #fff;
+  box-shadow: var(--glow-sm);
+}
+
+.chip input:checked + span::before {
+  content: '✓';
+  background: var(--violet);
+  border-color: var(--violet);
+}
+
+.chip input:focus-visible + span {
+  outline: 2px solid var(--violet-bright);
+  outline-offset: 2px;
 }
 
 /* ---------- Footer ---------- */
