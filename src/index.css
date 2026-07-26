@@ -684,10 +684,10 @@ a {
   border-radius: var(--radius-lg);
   overflow: hidden;
   transition:
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .project-card:hover,
@@ -701,9 +701,7 @@ a {
   flex: 0 0 150px;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
-  transition: flex-basis 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  /* Keep the mini-site's wheel scroll to itself. */
-  overscroll-behavior: contain;
+  transition: flex-basis 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-art .orb {
@@ -747,31 +745,6 @@ a {
 
 .project-live.is-ready {
   opacity: 1;
-}
-
-/* "Open ↗" pill over the picture on hover — the whole card is a link, so
-   clicking it still navigates while the rest of the frame scrolls. */
-.project-open {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 6;
-  display: inline-flex;
-  align-items: center;
-  padding: 5px 12px;
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  color: #fff;
-  background: linear-gradient(135deg, var(--violet), var(--violet-deep));
-  box-shadow: var(--glow-sm);
-  opacity: 0;
-  transform: translateY(-6px);
-  pointer-events: none;
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
 }
 
 /* Keeps the label and body text legible over a screenshot of any brightness. */
@@ -878,66 +851,54 @@ a {
   overflow: hidden;
 }
 
-/* ---- Hover, split into two zones ----
-   Gated on real hover so touch devices get the full, static card. Zones are
-   distinguished with :has() — hovering the picture vs the text does different
-   things. */
+/* ---- Hover: grow, reveal the site, unclamp the text ----
+   Gated on real hover so touch devices get the full, static card instead of a
+   state they can never trigger. */
 @media (hover: hover) and (pointer: fine) {
   .project-card {
+    /* Room for the unclamped description to expand into. */
     will-change: transform, height;
   }
 
-  /* Any hover / keyboard focus: a gentle lift only. No scale — scaling an
-     iframe preview blurs it and feels like a jump. */
+  /* Grows 40px up and 130px down. The row height is fixed, so this overflows
+     rather than reflowing; 130px is what fits in the margin below the grid
+     before the next section's first visible element. */
   .project-card:hover,
-  .project-card:focus-within {
-    transform: translateY(-8px);
+  .project-card:focus-visible {
+    height: calc(100% + 170px);
+    transform: translateY(-40px) scale(1.045);
     z-index: 5;
   }
 
-  /* Once you're interacting, step the label + scrim aside so the real site
-     shows through. */
-  .project-card:hover .project-scrim,
-  .project-card:focus-within .project-scrim {
-    opacity: 0.4;
+  /* More of the site on show, less chrome — but not so much that it starves
+     the description, which has to fit the longest project blurb unclamped. */
+  .project-card:hover .project-art,
+  .project-card:focus-visible .project-art {
+    flex-basis: 215px;
   }
+
+  .project-card:hover .project-scrim,
+  .project-card:focus-visible .project-scrim {
+    opacity: 0.45;
+  }
+
   .project-card:hover .art-label,
-  .project-card:focus-within .art-label {
+  .project-card:focus-visible .art-label {
     opacity: 0;
     transform: translateY(-10px);
   }
 
-  /* ===== Zone 1 — hovering the PICTURE: grow it into a scrollable mini-site ===== */
-  .project-card:has(.project-art:hover) {
-    height: calc(100% + 150px);
-  }
-  .project-card:has(.project-art:hover) .project-art {
-    flex-basis: 300px;
-  }
-  /* Make the live frame interactive so the wheel scrolls the mini-site itself;
-     the browser keeps the page still while the pointer is over it. */
-  .project-art:hover .project-live.is-ready {
-    pointer-events: auto;
-  }
-  .project-art:hover .project-open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  /* ===== Zone 2 — hovering the TEXT: reveal the full description =====
-     Keyboard focus can't tell the zones apart, so it falls back to this one. */
-  .project-card:has(.project-body:hover),
-  .project-card:focus-within {
-    height: calc(100% + 150px);
-  }
-  .project-card:has(.project-body:hover) .project-desc,
-  .project-card:focus-within .project-desc {
+  /* Drop the clamp entirely rather than raising it to a bigger number: line
+     counts that fit English clip Russian, and hand-tuning copy to fit pixels
+     breaks the next time anyone edits it. If a translation still overruns, it
+     scrolls instead of being cut off. */
+  .project-card:hover .project-desc,
+  .project-card:focus-visible .project-desc {
     display: block;
     -webkit-line-clamp: unset;
     line-clamp: unset;
-    /* Bounded so a long translation scrolls inside the card rather than
-       overflowing it. */
+    /* Bounded here (unlike at rest) so a long translation scrolls inside the
+       card rather than overflowing it. */
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
@@ -949,6 +910,7 @@ a {
   .project-card .project-desc::-webkit-scrollbar {
     width: 4px;
   }
+
   .project-card .project-desc::-webkit-scrollbar-thumb {
     background: rgba(124, 92, 255, 0.5);
     border-radius: 4px;
@@ -960,13 +922,17 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .project-card,
   .project-art,
-  .project-shot,
-  .project-live {
+  .project-shot {
     transition: opacity 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .project-card:hover,
-  .project-card:focus-within {
+  .project-card:focus-visible {
+    transform: none;
+  }
+
+  .project-card:hover .project-shot,
+  .project-card:focus-visible .project-shot {
     transform: none;
   }
 }
