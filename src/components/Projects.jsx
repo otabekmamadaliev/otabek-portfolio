@@ -97,7 +97,6 @@ function ProjectCard({ meta, content }) {
             title={content.title}
             onLoad={() => setReady(true)}
             loading="lazy"
-            scrolling="no"
             tabIndex={-1}
             aria-hidden="true"
             sandbox="allow-scripts allow-same-origin"
@@ -105,6 +104,11 @@ function ProjectCard({ meta, content }) {
         )}
         <span className="project-scrim" aria-hidden="true" />
         <span className="art-label">{content.artLabel}</span>
+        {meta.href && (
+          <span className="project-open" aria-hidden="true">
+            Open ↗
+          </span>
+        )}
       </div>
       <div className="project-body">
         <p className="project-status">{content.status}</p>
