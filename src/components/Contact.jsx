@@ -31,7 +31,6 @@ function Contact() {
     const fd = new FormData(formRef.current)
     const name = (fd.get('from_name') || '').toString().trim()
     const email = (fd.get('reply_to') || '').toString().trim()
-    const time = (fd.get('preferred_time') || '').toString().trim()
     const details = (fd.get('details') || '').toString().trim()
     const types = fd.getAll('project').map((v) => v.toString())
 
@@ -45,7 +44,6 @@ function Contact() {
     // Compose everything into the template's {{message}} so no template edit is
     // needed; still pass the individual fields it already uses.
     const lines = [`Wants: ${types.length ? types.join(', ') : '—'}`]
-    if (time) lines.push(`Preferred time: ${time}`)
     lines.push('', details || '(no extra details)')
 
     setStatus('sending')
@@ -56,7 +54,6 @@ function Contact() {
         {
           from_name: name || 'Website visitor',
           reply_to: email,
-          preferred_time: time,
           message: lines.join('\n'),
         },
         { publicKey: PUBLIC_KEY },
@@ -135,16 +132,6 @@ function Contact() {
                 type="email"
                 placeholder={t.contact.emailPlaceholder}
                 required
-              />
-            </div>
-
-            <div className="field field-full">
-              <label htmlFor="preferred_time">{t.contact.time}</label>
-              <input
-                id="preferred_time"
-                name="preferred_time"
-                type="text"
-                placeholder={t.contact.timePlaceholder}
               />
             </div>
 
