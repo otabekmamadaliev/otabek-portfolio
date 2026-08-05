@@ -865,7 +865,9 @@ a {
      before the next section's first visible element. */
   .project-card:hover,
   .project-card:focus-visible {
-    height: calc(100% + 170px);
+    /* Grow to fit the unclamped text rather than a fixed height with an inner
+       scrollbar — so the wheel scrolls the page normally, never the card. */
+    height: auto;
     transform: translateY(-40px) scale(1.045);
     z-index: 5;
   }
@@ -897,23 +899,10 @@ a {
     display: block;
     -webkit-line-clamp: unset;
     line-clamp: unset;
-    /* Bounded here (unlike at rest) so a long translation scrolls inside the
-       card rather than overflowing it. */
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(124, 92, 255, 0.5) transparent;
-  }
-
-  .project-card .project-desc::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .project-card .project-desc::-webkit-scrollbar-thumb {
-    background: rgba(124, 92, 255, 0.5);
-    border-radius: 4px;
+    flex: 0 0 auto;
+    /* No inner scroll box: the card grows to fit (height:auto above), so the
+       wheel scrolls the page rather than being trapped in the description. */
+    overflow: visible;
   }
 }
 
