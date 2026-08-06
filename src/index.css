@@ -29,10 +29,10 @@
    script in index.html / the ThemeProvider). Only the color tokens change; the
    whole design is built on these variables. */
 :root[data-theme='light'] {
-  --bg: #f6f6fb;
+  --bg: #ffffff;
   --bg-raised: #ffffff;
   --card: #ffffff;
-  --card-hover: #f3f1fc;
+  --card-hover: #f5f4fb;
   --border: #e6e4f0;
   --border-glow: #cfc9ea;
   --violet: #6d45f5;
@@ -54,18 +54,25 @@
   background: rgba(255, 255, 255, 0.85);
 }
 
-/* Light mode goes fully light — the hero terminal and the project-card image
-   areas follow the theme instead of staying dark. */
+/* The terminal is grey rather than white — a full-white code panel on a white
+   page is harsh, and grey keeps it reading as a distinct "console" surface. */
 :root[data-theme='light'] .buildlog {
-  background: rgba(255, 255, 255, 0.94);
+  background: #eceaf2;
+  border-color: #dcd9e6;
 }
 :root[data-theme='light'] .buildlog-bar {
-  background: rgba(240, 240, 249, 0.9);
+  background: #e0dde9;
+  border-bottom-color: #d2cede;
+}
+:root[data-theme='light'] .buildlog-dot {
+  background: #bab5c9;
+}
+:root[data-theme='light'] .buildlog-status {
+  border-top-color: #d8d4e2;
 }
 
-/* The card art sits behind a screenshot; drop the dark tint/scrim so the
-   (light) screenshots read naturally, and flip the tagline to dark text with a
-   white glow so it stays legible. */
+/* Screenshots show at full brightness; only a soft gradient sits behind the
+   tagline so white text stays readable without darkening the whole image. */
 :root[data-theme='light'] .art-violet,
 :root[data-theme='light'] .art-indigo,
 :root[data-theme='light'] .art-magenta {
@@ -77,16 +84,16 @@
 :root[data-theme='light'] .project-scrim {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0) 42%,
-    rgba(255, 255, 255, 0.14) 100%
+    rgba(18, 16, 34, 0.42) 0%,
+    rgba(18, 16, 34, 0.18) 45%,
+    rgba(18, 16, 34, 0.5) 100%
   );
 }
 :root[data-theme='light'] .art-label {
-  color: #16152a;
+  color: #ffffff;
   text-shadow:
-    0 1px 10px rgba(255, 255, 255, 0.95),
-    0 0 24px rgba(255, 255, 255, 0.8);
+    0 2px 12px rgba(12, 10, 26, 0.85),
+    0 0 26px rgba(12, 10, 26, 0.6);
 }
 
 * {
@@ -784,15 +791,18 @@ a {
   display: flex;
   flex-direction: column;
   height: 100%;
+  /* Starting point for the hover growth. max-height animates (height:auto
+     doesn't), so both states need a value for the transition to interpolate. */
+  max-height: 430px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   transition:
-    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-    height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
 .project-card:hover,
@@ -806,7 +816,7 @@ a {
   flex: 0 0 150px;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
-  transition: flex-basis 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: flex-basis 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .project-art .orb {
@@ -962,17 +972,19 @@ a {
 @media (hover: hover) and (pointer: fine) {
   .project-card {
     /* Room for the unclamped description to expand into. */
-    will-change: transform, height;
+    will-change: transform, max-height;
   }
 
   /* Grows 40px up and 130px down. The row height is fixed, so this overflows
      rather than reflowing; 130px is what fits in the margin below the grid
      before the next section's first visible element. */
+  /* `height:auto` can't be animated, so hovering used to snap. Interpolating
+     max-height instead keeps the growth smooth; the value only has to be
+     larger than the tallest card, and the box stays sized by its content. */
   .project-card:hover,
   .project-card:focus-visible {
-    /* Grow to fit the unclamped text rather than a fixed height with an inner
-       scrollbar — so the wheel scrolls the page normally, never the card. */
     height: auto;
+    max-height: 900px;
     transform: translateY(-40px) scale(1.045);
     z-index: 5;
   }
@@ -1415,6 +1427,9 @@ a {
 
   .project-card {
     height: auto;
+    /* No hover here, so the card shows its full text — the desktop growth
+       clamp must not crop it. */
+    max-height: none;
   }
 
   .project-art {
