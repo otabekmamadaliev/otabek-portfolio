@@ -1,5 +1,6 @@
 import { useLang } from '../i18n/lang.jsx'
 import LanguageSwitcher from './LanguageSwitcher.jsx'
+import ThemeToggle from './ThemeToggle.jsx'
 
 const NAV = [
   { num: '01', key: 'home', href: '#top' },
@@ -85,7 +86,10 @@ function Sidebar() {
         </nav>
         <div className="sidebar-footer">
           <LanguageSwitcher />
-          <SocialRow className="social-row" />
+          <div className="footer-controls">
+            <SocialRow className="social-row" />
+            <ThemeToggle />
+          </div>
           <a className="btn btn-primary btn-sm" href="#contact">
             {t.bookCall}
           </a>
@@ -96,6 +100,7 @@ function Sidebar() {
           {'</>'} OTABEK
         </a>
         <div className="topbar-right">
+          <ThemeToggle />
           <LanguageSwitcher />
           <a className="btn btn-primary btn-sm" href="#contact">
             {t.bookCall}

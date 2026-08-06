@@ -24,6 +24,50 @@
   --radius-lg: 18px;
 }
 
+/* ---------- Light theme ----------
+   Applied when the <html data-theme="light"> attribute is set (by the no-flash
+   script in index.html / the ThemeProvider). Only the color tokens change; the
+   whole design is built on these variables. */
+:root[data-theme='light'] {
+  --bg: #f6f6fb;
+  --bg-raised: #ffffff;
+  --card: #ffffff;
+  --card-hover: #f3f1fc;
+  --border: #e6e4f0;
+  --border-glow: #cfc9ea;
+  --violet: #6d45f5;
+  --violet-bright: #6d45f5;
+  --violet-deep: #5a34e0;
+  --neon: #7c5cff;
+  --text: #171622;
+  --text-secondary: #56546b;
+  --text-dim: #8a889e;
+  --glow-sm: 0 4px 16px rgba(109, 69, 245, 0.16);
+  --glow-md: 0 12px 34px rgba(109, 69, 245, 0.14);
+}
+
+/* Frosted bars follow the theme (their backgrounds are hardcoded, not tokens). */
+:root[data-theme='light'] .sidebar {
+  background: rgba(255, 255, 255, 0.82);
+}
+:root[data-theme='light'] .topbar {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* The hero terminal and the project-card art frames stay dark in both themes
+   (a code terminal and image frames read best dark) — re-assert dark tokens on
+   them so their text/borders don't invert on the light page. */
+:root[data-theme='light'] .buildlog {
+  --text: #f2f1f7;
+  --text-secondary: #9a98ad;
+  --text-dim: #5e5c72;
+  --border: #222238;
+  --border-glow: #3b3b5e;
+}
+:root[data-theme='light'] .art-label {
+  color: #f4f3fb;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -37,6 +81,9 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;
@@ -187,6 +234,43 @@ a {
   color: #fff;
   background: linear-gradient(135deg, var(--violet), var(--violet-deep));
   box-shadow: var(--glow-sm);
+}
+
+/* ---------- Theme toggle ---------- */
+
+.footer-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--violet-bright);
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-sm);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
 }
 
 .social-row {
