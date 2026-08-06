@@ -30,28 +30,77 @@
    whole design is built on these variables. */
 :root[data-theme='light'] {
   --bg: #ffffff;
-  --bg-raised: #ffffff;
-  --card: #ffffff;
-  --card-hover: #f5f4fb;
-  --border: #e6e4f0;
-  --border-glow: #cfc9ea;
-  --violet: #6d45f5;
-  --violet-bright: #6d45f5;
-  --violet-deep: #5a34e0;
+  --bg-raised: #f8f9fc;
+  --card: #f1f3f9;
+  --card-hover: #e6e9f2;
+  --border: #d2d6e5;
+  --border-glow: #b9bed4;
+  /* Deepened so violet text/icons stay legible on white. */
+  --violet: #6344e3;
+  --violet-bright: #4f32c3;
+  --violet-deep: #3c22a9;
   --neon: #7c5cff;
-  --text: #171622;
-  --text-secondary: #56546b;
-  --text-dim: #8a889e;
-  --glow-sm: 0 4px 16px rgba(109, 69, 245, 0.16);
-  --glow-md: 0 12px 34px rgba(109, 69, 245, 0.14);
+  --text: #0f0e17;
+  --text-secondary: #56536b;
+  --text-dim: #848199;
+  /* Dark mode lifts things with neon glow; on white that reads as nothing, so
+     depth comes from soft absorbed shadows instead. */
+  --glow-sm: 0 2px 8px rgba(99, 68, 227, 0.1);
+  --glow-md:
+    0 8px 24px rgba(15, 14, 23, 0.08),
+    0 2px 6px rgba(99, 68, 227, 0.06);
 }
 
 /* Frosted bars follow the theme (their backgrounds are hardcoded, not tokens). */
 :root[data-theme='light'] .sidebar {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.75);
 }
 :root[data-theme='light'] .topbar {
   background: rgba(255, 255, 255, 0.85);
+}
+
+/* Ambient hero washes: barely-there tints so they don't dirty the white. */
+:root[data-theme='light'] .hero-bg {
+  background:
+    radial-gradient(600px 400px at 80% 20%, rgba(124, 92, 255, 0.06), transparent 80%),
+    radial-gradient(500px 400px at 15% 85%, rgba(99, 68, 227, 0.04), transparent 80%);
+}
+
+:root[data-theme='light'] .scene-frame {
+  border-color: rgba(99, 68, 227, 0.2);
+  background: linear-gradient(160deg, rgba(99, 68, 227, 0.03), rgba(255, 255, 255, 0) 55%);
+  box-shadow:
+    inset 0 0 60px rgba(99, 68, 227, 0.03),
+    var(--glow-md);
+}
+
+/* Accent-tinted surfaces, re-mixed for a light base. */
+:root[data-theme='light'] .skill-glyph {
+  background: rgba(99, 68, 227, 0.05);
+  border-color: rgba(99, 68, 227, 0.2);
+  box-shadow: inset 0 0 14px rgba(99, 68, 227, 0.03);
+}
+:root[data-theme='light'] .chip input:checked + span {
+  background: rgba(99, 68, 227, 0.08);
+}
+:root[data-theme='light'] .project-card:hover,
+:root[data-theme='light'] .project-card:focus-visible {
+  border-color: rgba(99, 68, 227, 0.3);
+}
+:root[data-theme='light'] .sidebar-link:hover {
+  background: rgba(99, 68, 227, 0.05);
+}
+:root[data-theme='light'] .cta-banner {
+  border-color: rgba(99, 68, 227, 0.22);
+  background:
+    radial-gradient(400px 200px at 15% 0%, rgba(99, 68, 227, 0.08), transparent 75%),
+    var(--bg-raised);
+}
+:root[data-theme='light'] .btn-primary {
+  box-shadow: 0 4px 14px rgba(99, 68, 227, 0.25);
+}
+:root[data-theme='light'] .form-msg.error {
+  color: #dc3545;
 }
 
 /* The terminal is grey rather than white — a full-white code panel on a white
@@ -73,10 +122,24 @@
 
 /* Screenshots show at full brightness; only a soft gradient sits behind the
    tagline so white text stays readable without darkening the whole image. */
-:root[data-theme='light'] .art-violet,
-:root[data-theme='light'] .art-indigo,
+:root[data-theme='light'] .art-violet {
+  background: linear-gradient(150deg, #f3f0ff, #e8e3ff);
+}
+:root[data-theme='light'] .art-indigo {
+  background: linear-gradient(150deg, #edf2ff, #e0e7ff);
+}
 :root[data-theme='light'] .art-magenta {
-  background: linear-gradient(150deg, #ece9f7, #f6f6fb);
+  background: linear-gradient(150deg, #fdf2f8, #fce7f3);
+}
+/* Softened so they read as tint, not stains on light paper. */
+:root[data-theme='light'] .art-violet .orb {
+  background: rgba(124, 92, 255, 0.2);
+}
+:root[data-theme='light'] .art-indigo .orb {
+  background: rgba(91, 61, 245, 0.15);
+}
+:root[data-theme='light'] .art-magenta .orb {
+  background: rgba(167, 139, 250, 0.15);
 }
 :root[data-theme='light'] .project-shot {
   opacity: 1;
