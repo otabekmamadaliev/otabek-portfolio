@@ -28,175 +28,183 @@
    Applied when the <html data-theme="light"> attribute is set (by the no-flash
    script in index.html / the ThemeProvider). Only the color tokens change; the
    whole design is built on these variables. */
-/* Design philosophy split: dark mode builds hierarchy from glow, transparency
-   and deep contrast; light mode from borders, elevation and spacing. Same
-   violet identity in both — aiming at the Linear / Vercel / Raycast register
-   rather than a glassy or colourful light theme. */
+/* Modelled on Google's light UI (Gmail/Drive), which is restful for three
+   reasons we were getting wrong: the page is a soft NEUTRAL grey with white
+   cards floating on it (the grey is where the eye rests), text is a near-black
+   grey rather than true black, and the accent is desaturated and used
+   sparingly. Pure white everywhere + 17:1 text + saturated violet is what made
+   the previous attempts fatiguing. */
 :root[data-theme='light'] {
-  --bg: #ffffff;
-  --bg-raised: #f8f8fc;
+  --bg: #f8f9fa;
+  --bg-raised: #ffffff;
   --card: #ffffff;
-  --card-hover: #f4f4fa;
-  --border: #e4e6ee;
-  --border-glow: #c7c9e3;
-  /* Same accent as dark; only the "bright" and "neon" steps darken so they
-     stay legible on white. */
-  --violet: #7c5cff;
-  --violet-bright: #6b47ff;
-  --violet-deep: #5b3df5;
-  --neon: #8664ff;
-  --text: #111827;
-  --text-secondary: #5f6477;
-  --text-dim: #8a90a5;
+  --card-hover: #f1f3f4;
+  --border: #dadce0;
+  --border-glow: #c4c7cc;
+  /* Calmer violet: the dark-mode #7c5cff is fully saturated and visibly
+     vibrates against a light background. */
+  --violet: #6750a4;
+  --violet-bright: #5f4b9e;
+  --violet-deep: #543e94;
+  --neon: #6750a4;
+  --text: #202124;
+  --text-secondary: #5f6368;
+  --text-dim: #80868b;
 
-  /* Elevation replaces emission. Kept on the existing --glow-* names so every
-     component picks them up, plus a --shadow-lg for the raised card state. */
-  --shadow-sm: 0 2px 8px rgba(17, 23, 40, 0.04);
-  --shadow-md: 0 8px 24px rgba(17, 23, 40, 0.08);
-  --shadow-lg: 0 18px 50px rgba(17, 23, 40, 0.12);
-  --glow-sm: 0 2px 8px rgba(17, 23, 40, 0.04), 0 0 6px rgba(124, 92, 255, 0.12);
-  --glow-md: 0 8px 24px rgba(17, 23, 40, 0.08), 0 0 6px rgba(124, 92, 255, 0.12);
+  /* Quiet, close-to-the-surface elevation instead of glow. */
+  --shadow-sm: 0 1px 2px rgba(60, 64, 67, 0.1);
+  --shadow-md: 0 1px 3px rgba(60, 64, 67, 0.1), 0 4px 12px rgba(60, 64, 67, 0.08);
+  --shadow-lg: 0 2px 6px rgba(60, 64, 67, 0.1), 0 10px 28px rgba(60, 64, 67, 0.1);
+  --glow-sm: 0 1px 2px rgba(60, 64, 67, 0.1);
+  --glow-md: 0 1px 3px rgba(60, 64, 67, 0.1), 0 4px 12px rgba(60, 64, 67, 0.08);
 }
 
-/* Nav: white glass rather than dark glass. */
+/* Solid white chrome against the grey page — no glass, no tint. */
 :root[data-theme='light'] .sidebar {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-right: 1px solid #ececf5;
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-right: 1px solid var(--border);
 }
 :root[data-theme='light'] .topbar {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid #ececf5;
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid var(--border);
 }
 
-/* Ambient hero wash: enough life to avoid a flat white page, not enough to
-   overwhelm it. */
+/* No coloured wash over the page. Tinting a light background is most of what
+   made it feel busy; the grey base already provides the separation. */
 :root[data-theme='light'] .hero-bg {
-  background:
-    radial-gradient(600px 400px at 80% 20%, rgba(124, 92, 255, 0.08), transparent 70%),
-    radial-gradient(500px 400px at 15% 85%, rgba(80, 120, 255, 0.05), transparent 70%);
+  background: none;
 }
 
 :root[data-theme='light'] .scene-frame {
-  border-color: rgba(124, 92, 255, 0.22);
-  background: linear-gradient(160deg, rgba(124, 92, 255, 0.04), rgba(255, 255, 255, 0) 55%);
-  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
 }
 
-/* Cards: white surface, crisp border, soft elevation. The hover *transform*
-   is deliberately left alone — the growth animation is its own feature. */
+/* White cards on the grey page — the separation comes from the surface
+   change, so borders and shadows can stay quiet. The hover *transform* is
+   deliberately left alone: the growth animation is its own feature. */
 :root[data-theme='light'] .project-card {
   background: #ffffff;
-  border-color: #e7e8f1;
+  border-color: var(--border);
   box-shadow: var(--shadow-sm);
 }
 :root[data-theme='light'] .project-card:hover,
 :root[data-theme='light'] .project-card:focus-visible {
-  border-color: #7c5cff;
-  box-shadow:
-    0 18px 40px rgba(17, 23, 40, 0.1),
-    0 0 12px rgba(124, 92, 255, 0.1);
+  border-color: #c9bfe4;
+  box-shadow: var(--shadow-lg);
 }
 
-/* Skill tiles: faint violet paper, lifting to white on hover. */
 :root[data-theme='light'] .skill-tile {
-  background: #faf8ff;
-  border-color: #dcd4ff;
+  background: #ffffff;
+  border-color: var(--border);
 }
 :root[data-theme='light'] .skill-tile:hover {
   background: #ffffff;
-  border-color: #7c5cff;
-  box-shadow: 0 10px 24px rgba(17, 23, 40, 0.08);
+  border-color: #c9bfe4;
+  box-shadow: var(--shadow-md);
 }
 :root[data-theme='light'] .skill-glyph {
-  background: rgba(124, 92, 255, 0.08);
-  border-color: #dcd4ff;
+  background: #f1eefa;
+  border-color: #ded6f0;
   box-shadow: none;
 }
 
+:root[data-theme='light'] .chip span {
+  background: #ffffff;
+}
 :root[data-theme='light'] .chip input:checked + span {
-  background: rgba(124, 92, 255, 0.08);
+  background: #f1eefa;
+  box-shadow: none;
 }
 :root[data-theme='light'] .sidebar-link:hover {
-  background: rgba(124, 92, 255, 0.06);
+  background: #f1f3f4;
 }
 
-/* CTA: white card carrying the signature violet wash. */
+:root[data-theme='light'] .field input,
+:root[data-theme='light'] .field textarea {
+  background: #ffffff;
+}
+
+/* CTA: a plain white card. The violet arrives through the button, not a wash. */
 :root[data-theme='light'] .cta-banner {
-  border-color: #e7e8f1;
-  background:
-    radial-gradient(400px 200px at 15% 0%, rgba(124, 92, 255, 0.08), transparent 70%),
-    #ffffff;
+  border-color: var(--border);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+:root[data-theme='light'] .btn-primary {
+  box-shadow: var(--shadow-sm);
+}
+:root[data-theme='light'] .btn-primary:hover {
   box-shadow: var(--shadow-md);
 }
-
-/* Focus ring stays the lighter violet — it already reads well on white. */
-:root[data-theme='light'] :focus-visible {
-  outline-color: #9d7fff;
+:root[data-theme='light'] .theme-toggle:hover,
+:root[data-theme='light'] .social-link:hover {
+  filter: none;
+  box-shadow: none;
 }
 
-/* The terminal stays a tinted grey panel, not white: still reads as a console
-   while contrasting against the page. */
+/* A slightly recessed grey panel — reads as a console without a white glare
+   or a dark block. */
 :root[data-theme='light'] .buildlog {
-  background: #f4f5f8;
-  border-color: #dcdfea;
-  box-shadow: var(--shadow-md);
+  background: #eef0f2;
+  border-color: var(--border);
+  box-shadow: none;
 }
 :root[data-theme='light'] .buildlog-bar {
-  background: #eceef5;
-  border-bottom-color: #dcdfea;
+  background: #e4e7ea;
+  border-bottom-color: #d5d8dc;
 }
 :root[data-theme='light'] .buildlog-dot {
-  background: #c3c8d6;
-}
-:root[data-theme='light'] .buildlog-body {
-  color: #1f2937;
+  background: #bdc1c6;
 }
 :root[data-theme='light'] .buildlog-step {
-  color: #6b7280;
+  color: #80868b;
 }
 :root[data-theme='light'] .buildlog-step.done {
-  color: #4b5563;
+  color: #5f6368;
 }
 :root[data-theme='light'] .buildlog-step.active {
-  color: #1f2937;
+  color: #202124;
 }
 :root[data-theme='light'] .buildlog-title,
 :root[data-theme='light'] .buildlog-status {
-  color: #6b7280;
+  color: #5f6368;
 }
 :root[data-theme='light'] .buildlog-status {
-  border-top-color: #dcdfea;
+  border-top-color: #d5d8dc;
 }
 :root[data-theme='light'] .step-icon {
-  border-color: #cbd0dd;
+  border-color: #c4c7cc;
+}
+:root[data-theme='light'] .buildlog-step.done .step-icon {
+  background: #f1eefa;
+  border-color: #b9abdd;
+  color: var(--violet);
+  box-shadow: none;
 }
 :root[data-theme='light'] .cursor {
-  background: #7c5cff;
+  background: var(--violet);
   box-shadow: none;
 }
 
-/* Project panels: soft tints that separate without going harsh. */
-:root[data-theme='light'] .art-violet {
-  background: #f5f2ff;
-}
-:root[data-theme='light'] .art-indigo {
-  background: #f4f8ff;
-}
+/* Neutral panels — the screenshots supply the colour. */
+:root[data-theme='light'] .art-violet,
+:root[data-theme='light'] .art-indigo,
 :root[data-theme='light'] .art-magenta {
-  background: #fff2fa;
+  background: #eef0f2;
 }
-:root[data-theme='light'] .art-violet .orb {
-  background: rgba(124, 92, 255, 0.18);
-}
+:root[data-theme='light'] .art-violet .orb,
 :root[data-theme='light'] .art-indigo .orb {
-  background: rgba(80, 120, 255, 0.14);
+  background: rgba(103, 80, 164, 0.1);
 }
 :root[data-theme='light'] .art-magenta .orb {
-  background: rgba(167, 139, 250, 0.14);
+  background: rgba(103, 80, 164, 0.1);
 }
 :root[data-theme='light'] .project-shot {
   opacity: 1;
