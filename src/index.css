@@ -54,18 +54,39 @@
   background: rgba(255, 255, 255, 0.85);
 }
 
-/* The hero terminal and the project-card art frames stay dark in both themes
-   (a code terminal and image frames read best dark) — re-assert dark tokens on
-   them so their text/borders don't invert on the light page. */
+/* Light mode goes fully light — the hero terminal and the project-card image
+   areas follow the theme instead of staying dark. */
 :root[data-theme='light'] .buildlog {
-  --text: #f2f1f7;
-  --text-secondary: #9a98ad;
-  --text-dim: #5e5c72;
-  --border: #222238;
-  --border-glow: #3b3b5e;
+  background: rgba(255, 255, 255, 0.94);
+}
+:root[data-theme='light'] .buildlog-bar {
+  background: rgba(240, 240, 249, 0.9);
+}
+
+/* The card art sits behind a screenshot; drop the dark tint/scrim so the
+   (light) screenshots read naturally, and flip the tagline to dark text with a
+   white glow so it stays legible. */
+:root[data-theme='light'] .art-violet,
+:root[data-theme='light'] .art-indigo,
+:root[data-theme='light'] .art-magenta {
+  background: linear-gradient(150deg, #ece9f7, #f6f6fb);
+}
+:root[data-theme='light'] .project-shot {
+  opacity: 1;
+}
+:root[data-theme='light'] .project-scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0) 42%,
+    rgba(255, 255, 255, 0.14) 100%
+  );
 }
 :root[data-theme='light'] .art-label {
-  color: #f4f3fb;
+  color: #16152a;
+  text-shadow:
+    0 1px 10px rgba(255, 255, 255, 0.95),
+    0 0 24px rgba(255, 255, 255, 0.8);
 }
 
 * {
