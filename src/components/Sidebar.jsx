@@ -45,7 +45,7 @@ function SocialRow({ className }) {
       {SOCIALS.map((social) => (
         <a
           key={social.label}
-          className="social-link"
+          className="profile-link"
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
@@ -85,7 +85,7 @@ function Sidebar() {
         </nav>
         <div className="sidebar-footer">
           <LanguageSwitcher />
-          <SocialRow className="social-row" />
+          <SocialRow className="profile-row" />
           <a className="btn btn-primary btn-sm" href="#contact">
             {t.bookCall}
           </a>
