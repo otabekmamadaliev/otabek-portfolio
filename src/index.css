@@ -189,13 +189,13 @@ a {
   box-shadow: var(--glow-sm);
 }
 
-.social-row {
+.profile-row {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.social-link {
+.profile-link {
   display: inline-flex;
   color: var(--text-dim);
   transition:
@@ -204,12 +204,12 @@ a {
     transform 0.2s ease;
 }
 
-.social-link svg {
+.profile-link svg {
   width: 19px;
   height: 19px;
 }
 
-.social-link:hover {
+.profile-link:hover {
   color: var(--violet-bright);
   filter: drop-shadow(0 0 8px rgba(124, 92, 255, 0.7));
   transform: translateY(-2px);
