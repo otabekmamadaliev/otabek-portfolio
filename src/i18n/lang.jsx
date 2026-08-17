@@ -30,7 +30,9 @@ export function LanguageProvider({ children }) {
 
   useEffect(() => {
     document.documentElement.lang = lang
-    document.title = `Otabek — ${translations[lang].meta.role}`
+    // Full name, so searching "Otabek Mamadaliev" matches the strongest
+    // on-page signal. This runs on load and overwrites index.html's <title>.
+    document.title = `Otabek Mamadaliev — ${translations[lang].meta.role}`
   }, [lang])
 
   const value = { lang, setLang, langs: LANGS, t: translations[lang] }
