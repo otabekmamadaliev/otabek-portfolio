@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import Reveal from './Reveal.jsx'
+import SectionHead from './SectionHead.jsx'
 import { useLang } from '../i18n/lang.jsx'
 
 const SERVICE_ID = 'service_3o04ar1'
@@ -24,7 +25,15 @@ const OPTION_VALUES = [
 function Contact() {
   const { t } = useLang()
   const formRef = useRef(null)
+  const [picked, setPicked] = useState([])
   const [status, setStatus] = useState('idle') // idle | sending | sent | error | pick
+
+  const toggle = (value) => {
+    setPicked((cur) =>
+      cur.includes(value) ? cur.filter((v) => v !== value) : [...cur, value],
+    )
+    if (status === 'pick') setStatus('idle')
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -32,19 +41,21 @@ function Contact() {
     const name = (fd.get('from_name') || '').toString().trim()
     const email = (fd.get('reply_to') || '').toString().trim()
     const details = (fd.get('details') || '').toString().trim()
-    const types = fd.getAll('project').map((v) => v.toString())
 
-    // Lazy-friendly: a single checkbox is a valid request. Only block the truly
-    // empty submission where we'd have no idea what they want.
-    if (types.length === 0 && !details) {
+    // One chip is a complete request. Only block the truly empty submission,
+    // where there would be nothing to reply to.
+    if (picked.length === 0 && !details) {
       setStatus('pick')
       return
     }
 
-    // Compose everything into the template's {{message}} so no template edit is
-    // needed; still pass the individual fields it already uses.
-    const lines = [`Wants: ${types.length ? types.join(', ') : '—'}`]
-    lines.push('', details || '(no extra details)')
+    // Everything is composed into the template's {{message}} so the EmailJS
+    // template needs no edit; the fields it already maps are passed too.
+    const message = [
+      `Wants: ${picked.length ? picked.join(', ') : '-'}`,
+      '',
+      details || '(no extra details)',
+    ].join('\n')
 
     setStatus('sending')
     try {
@@ -54,11 +65,12 @@ function Contact() {
         {
           from_name: name || 'Website visitor',
           reply_to: email,
-          message: lines.join('\n'),
+          message,
         },
         { publicKey: PUBLIC_KEY },
       )
       setStatus('sent')
+      setPicked([])
       formRef.current.reset()
     } catch {
       setStatus('error')
@@ -68,113 +80,119 @@ function Contact() {
   return (
     <section className="section" id="contact">
       <div className="container">
-        <Reveal>
-          <div className="cta-banner">
+        <SectionHead
+          label={t.sections.contact}
+          title={t.contact.title}
+          datum={t.sections.contactDatum}
+        />
+        <div className="contact">
+          <Reveal>
             <div>
-              <h3>{t.cta.title}</h3>
-              <p>{t.cta.subtitle}</p>
-            </div>
-            <a className="btn btn-primary" href="#contact-form">
-              {t.cta.button} ↓
-            </a>
-          </div>
-        </Reveal>
-        <Reveal>
-          <p className="eyebrow">{t.contact.eyebrow}</p>
-          <h2 className="section-title">{t.contact.title}</h2>
-          <span className="title-underline" aria-hidden="true" />
-          <p className="contact-intro">{t.contact.intro}</p>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <form
-            className="contact-form"
-            id="contact-form"
-            ref={formRef}
-            onSubmit={handleSubmit}
-            noValidate
-          >
-            {/* What to build — pick-one-click chips, no typing required */}
-            <div className="field field-full">
-              <label className="field-label">{t.contact.message}</label>
-              <p className="field-hint">{t.contact.optionsHint}</p>
-              <div className="chip-group">
-                {t.contact.options.map((label, i) => (
-                  <label className="chip" key={OPTION_VALUES[i]}>
-                    <input
-                      type="checkbox"
-                      name="project"
-                      value={OPTION_VALUES[i]}
-                      onChange={() => status === 'pick' && setStatus('idle')}
-                    />
-                    <span>{label}</span>
-                  </label>
-                ))}
+              <p className="contact-intro">{t.contact.intro}</p>
+              <div className="contact-direct">
+                <span className="legend">{t.contact.direct}</span>
+                <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
               </div>
             </div>
+          </Reveal>
 
-            <div className="field">
-              <label htmlFor="from_name">
-                {t.contact.name}{' '}
-                <span className="opt">({t.contact.optional})</span>
-              </label>
-              <input
-                id="from_name"
-                name="from_name"
-                type="text"
-                placeholder={t.contact.namePlaceholder}
-              />
-            </div>
-            <div className="field">
-              <label htmlFor="reply_to">{t.contact.email} *</label>
-              <input
-                id="reply_to"
-                name="reply_to"
-                type="email"
-                placeholder={t.contact.emailPlaceholder}
-                required
-              />
-            </div>
+          <Reveal delay={0.08}>
+            <form ref={formRef} onSubmit={handleSubmit} noValidate>
+              <div className="form-block">
+                <div className="form-label">
+                  <span className="legend">{t.contact.message}</span>
+                  <span className="legend">{t.contact.optionsHint}</span>
+                </div>
+                <div className="chips">
+                  {t.contact.options.map((label, i) => (
+                    <button
+                      key={OPTION_VALUES[i]}
+                      type="button"
+                      className="chip"
+                      aria-pressed={picked.includes(OPTION_VALUES[i])}
+                      onClick={() => toggle(OPTION_VALUES[i])}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-            <div className="field field-full">
-              <label htmlFor="details">
-                {t.contact.details}{' '}
-                <span className="opt">({t.contact.optional})</span>
-              </label>
-              <textarea
-                id="details"
-                name="details"
-                rows="3"
-                placeholder={t.contact.detailsPlaceholder}
-              />
-            </div>
+              <div className="form-block form-row">
+                <div>
+                  <label className="form-label" htmlFor="from_name">
+                    <span className="legend">
+                      {t.contact.name} ({t.contact.optional})
+                    </span>
+                  </label>
+                  <input
+                    className="field"
+                    id="from_name"
+                    name="from_name"
+                    type="text"
+                    autoComplete="name"
+                    placeholder={t.contact.namePlaceholder}
+                  />
+                </div>
+                <div>
+                  <label className="form-label" htmlFor="reply_to">
+                    <span className="legend">{t.contact.email} *</span>
+                  </label>
+                  <input
+                    className="field"
+                    id="reply_to"
+                    name="reply_to"
+                    type="email"
+                    autoComplete="email"
+                    placeholder={t.contact.emailPlaceholder}
+                    required
+                  />
+                </div>
+              </div>
 
-            <div className="form-footer">
-              <button
-                className="btn btn-primary"
-                type="submit"
-                disabled={status === 'sending'}
-              >
-                {status === 'sending' ? t.contact.sending : t.contact.send}
-              </button>
-              {status === 'pick' && (
-                <p className="form-msg error" role="alert">
-                  {t.contact.pickOne}
-                </p>
-              )}
-              {status === 'sent' && (
-                <p className="form-msg success" role="status">
-                  {t.contact.success}
-                </p>
-              )}
-              {status === 'error' && (
-                <p className="form-msg error" role="alert">
-                  {t.contact.errorPrefix}
-                  <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
-                </p>
-              )}
-            </div>
-          </form>
-        </Reveal>
+              <div className="form-block">
+                <label className="form-label" htmlFor="details">
+                  <span className="legend">
+                    {t.contact.details} ({t.contact.optional})
+                  </span>
+                </label>
+                <textarea
+                  className="field"
+                  id="details"
+                  name="details"
+                  rows="3"
+                  placeholder={t.contact.detailsPlaceholder}
+                />
+              </div>
+
+              <div className="form-send">
+                <button
+                  className="btn btn-live"
+                  type="submit"
+                  disabled={status === 'sending'}
+                >
+                  {status === 'sending' ? t.contact.sending : t.contact.send}
+                </button>
+                {status === 'pick' && (
+                  <p className="form-msg bad" role="alert">
+                    {t.contact.pickOne}
+                  </p>
+                )}
+                {status === 'sent' && (
+                  <p className="form-msg ok" role="status">
+                    {t.contact.success}
+                  </p>
+                )}
+                {status === 'error' && (
+                  <p className="form-msg bad" role="alert">
+                    {t.contact.errorPrefix}
+                    <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                  </p>
+                )}
+              </div>
+            </form>
+          </Reveal>
+        </div>
       </div>
     </section>
   )
