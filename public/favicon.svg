@@ -1,8 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="22" fill="#0e0f22"/>
-  <g fill="none" stroke="#a78bfa" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="38,32 24,50 38,68"/>
-    <line x1="45" y1="70" x2="55" y2="30"/>
-    <polyline points="62,32 76,50 62,68"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Otabek Mamadaliev">
+  <!-- Control Room mark: an instrument bezel carrying a live sodium lamp.
+       The ring doubles as the O of Otabek; the lamp is the same amber this
+       site uses for every running service. Two shapes, one accent, high
+       contrast - so it still reads at 16x16 in a browser tab. -->
+  <rect width="100" height="100" rx="24" fill="#101619"/>
+  <circle cx="50" cy="50" r="25" fill="none" stroke="#e4dfd4" stroke-width="11"/>
+  <circle cx="68" cy="32" r="13" fill="#e8a33d"/>
 </svg>
