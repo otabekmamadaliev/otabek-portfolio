@@ -1,4 +1,7 @@
 import { MotionConfig } from 'framer-motion'
+// Vite/React entry point for Vercel Web Analytics. The dashboard snippet
+// defaults to the Next.js path, which is a no-op here.
+import { Analytics } from '@vercel/analytics/react'
 import Sidebar from './components/Sidebar.jsx'
 import Hero from './components/Hero.jsx'
 import Projects from './components/Projects.jsx'
@@ -23,6 +26,7 @@ function App() {
           <Footer />
         </div>
       </div>
+      <Analytics />
     </MotionConfig>
   )
 }
