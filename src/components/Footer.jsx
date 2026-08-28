@@ -6,11 +6,10 @@ function Footer() {
     <footer className="footer">
       <div className="container footer-inner">
         <p>
-          © {new Date().getFullYear()} Otabek — {t.footer.rights}
+          &copy; {new Date().getFullYear()} Otabek Mamadaliev &middot;{' '}
+          {t.footer.rights}
         </p>
-        <p className="footer-mono">
-          <span className="slash">{'//'}</span> {t.footer.crafted}
-        </p>
+        <p>{t.footer.built}</p>
       </div>
     </footer>
   )
