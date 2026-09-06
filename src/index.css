@@ -1029,6 +1029,26 @@ main {
   transform: translate(2px, -2px);
 }
 
+/* A product that is sold rather than published. The card keeps its shape and
+   its screenshot, but nothing here is clickable, so the label must not look
+   like a link or light up on hover the way the other four do. */
+.work-item--zamkniete {
+  cursor: default;
+}
+
+.work-open--cicho {
+  color: var(--haze);
+  border-bottom: 0;
+  padding-bottom: 0;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-size: 0.66rem;
+}
+
+.work-item--zamkniete:hover .work-open--cicho {
+  color: var(--haze);
+}
+
 .work-shot {
   position: relative;
   border: 1px solid var(--rule);

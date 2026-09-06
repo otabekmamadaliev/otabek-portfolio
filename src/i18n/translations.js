@@ -60,6 +60,7 @@ export const translations = {
     projects: {
       title: 'Five things I built and shipped',
       open: 'Open it',
+      onRequest: 'Private product — repository on request',
       items: [
         {
           status: 'Live',
@@ -206,6 +207,7 @@ export const translations = {
     projects: {
       title: 'Men yaratgan va ishga tushirgan beshta narsa',
       open: 'Ochish',
+      onRequest: "Yopiq mahsulot — repozitoriy so'rov bo'yicha",
       items: [
         {
           status: 'Jonli',
@@ -359,6 +361,7 @@ export const translations = {
     projects: {
       title: 'Pięć rzeczy, które zbudowałem i wdrożyłem',
       open: 'Otwórz',
+      onRequest: 'Produkt zamknięty — repozytorium na życzenie',
       items: [
         {
           status: 'Działa',
@@ -511,6 +514,7 @@ export const translations = {
     projects: {
       title: 'Пять вещей, которые я построил и запустил',
       open: 'Открыть',
+      onRequest: 'Закрытый продукт — репозиторий по запросу',
       items: [
         {
           status: 'Онлайн',

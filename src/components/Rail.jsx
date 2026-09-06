@@ -14,7 +14,8 @@ const NAV = [
 // This is the rail's reason to exist: it reports real state, so nothing
 // goes in this list that is not reachable right now.
 const SERVICES = [
-  { name: 'oliwka', href: 'https://github.com/otabekmamadaliev/oliwka-zamowienia' },
+  // Sold, not published — the rail points at its card rather than a repo.
+  { name: 'oliwka', href: '#projects' },
   { name: 'aurelia', href: 'https://aurelia-booking.vercel.app' },
   { name: 'mini-store', href: 'https://mini-store-olive.vercel.app' },
   { name: 'northgate', href: 'https://ai-support-widget-sand.vercel.app' },

@@ -11,9 +11,12 @@ import deleteanythingShot from '../assets/projects/deleteanything.webp'
 // Order is deliberate: the ordering system leads because it is the only one
 // with a backend of its own, and the last three are the React demos.
 const META = [
+  // Sold to restaurants, so there is nothing to send a stranger to: the guest
+  // menu is a paying venue's live data and the source is not a public demo.
+  // The card stays a card, not a dead link.
   {
     tags: ['Cloudflare Workers', 'D1 / SQLite', 'PWA', 'Playwright'],
-    href: 'https://github.com/otabekmamadaliev/oliwka-zamowienia',
+    prywatny: true,
     shot: oliwkaShot,
   },
   {
@@ -53,14 +56,22 @@ function Projects() {
         <div className="work">
           {META.map((meta, i) => {
             const c = t.projects.items[i]
+
+            // A private product renders as a plain card: same shape, same
+            // screenshot, but nothing to click and no arrow promising a page.
+            const Obudowa = meta.prywatny ? 'div' : 'a'
+            const wlasciwosci = meta.prywatny
+              ? { className: 'work-item work-item--zamkniete' }
+              : {
+                  className: 'work-item',
+                  href: meta.href,
+                  target: '_blank',
+                  rel: 'noreferrer',
+                }
+
             return (
               <Reveal key={i} delay={0.06 * i}>
-                <a
-                  className="work-item"
-                  href={meta.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <Obudowa {...wlasciwosci}>
                   <div>
                     <p className="work-top">
                       <span className="work-state">
@@ -76,12 +87,18 @@ function Projects() {
                         <span key={tag}>{tag}</span>
                       ))}
                     </div>
-                    <span className="work-open">
-                      {t.projects.open}
-                      <span className="arr" aria-hidden="true">
-                        &#8599;
+                    {meta.prywatny ? (
+                      <span className="work-open work-open--cicho">
+                        {t.projects.onRequest}
                       </span>
-                    </span>
+                    ) : (
+                      <span className="work-open">
+                        {t.projects.open}
+                        <span className="arr" aria-hidden="true">
+                          &#8599;
+                        </span>
+                      </span>
+                    )}
                   </div>
 
                   <div className="work-shot">
@@ -93,7 +110,7 @@ function Projects() {
                       aria-hidden="true"
                     />
                   </div>
-                </a>
+                </Obudowa>
               </Reveal>
             )
           })}
