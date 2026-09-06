@@ -1,12 +1,21 @@
 import Reveal from './Reveal.jsx'
 import SectionHead from './SectionHead.jsx'
 import { useLang } from '../i18n/lang.jsx'
+import oliwkaShot from '../assets/projects/oliwka.webp'
 import aureliaShot from '../assets/projects/aurelia.webp'
 import ministoreShot from '../assets/projects/ministore.webp'
 import widgetShot from '../assets/projects/widget.webp'
+import deleteanythingShot from '../assets/projects/deleteanything.webp'
 
 // Structure and links live here; translatable copy comes from i18n by index.
+// Order is deliberate: the ordering system leads because it is the only one
+// with a backend of its own, and the last three are the React demos.
 const META = [
+  {
+    tags: ['Cloudflare Workers', 'D1 / SQLite', 'PWA', 'Playwright'],
+    href: 'https://github.com/otabekmamadaliev/oliwka-zamowienia',
+    shot: oliwkaShot,
+  },
   {
     tags: ['React', 'Vite', 'EmailJS'],
     href: 'https://aurelia-booking.vercel.app',
@@ -21,6 +30,11 @@ const META = [
     tags: ['React', 'Vite', 'Gemini API', 'Shadow DOM'],
     href: 'https://ai-support-widget-sand.vercel.app',
     shot: widgetShot,
+  },
+  {
+    tags: ['Node.js', 'No dependencies', 'Own build pipeline', 'SEO'],
+    href: 'https://deleteanything.com',
+    shot: deleteanythingShot,
   },
 ]
 
