@@ -23,7 +23,7 @@ export const translations = {
     },
     sections: {
       work: 'Work',
-      workDatum: '3 products / all deployed',
+      workDatum: '5 products / all deployed',
       capability: 'Capability',
       capabilityDatum: 'What I ship',
       profile: 'Profile',
@@ -34,7 +34,7 @@ export const translations = {
     hero: {
       headline1: 'Most portfolios show screenshots.',
       headline2: 'Mine run.',
-      sub: 'Three products are deployed and serving traffic right now: a booking engine that resolves real conflicts, a store that takes real card payments, and a support bot that answers from a real knowledge base. The panel below is that booking engine. Pick a few nights.',
+      sub: 'Five products are deployed and serving traffic right now: a restaurant ordering system with its own kitchen, floor and owner screens, a booking engine that resolves real conflicts, a store that takes real card payments, a support bot that answers from a real knowledge base, and a reference site covering 61 platforms. The panel below is that booking engine. Pick a few nights.',
       viewWork: 'See the work',
       downloadCv: 'CV',
       bookCall: 'Book a call',
@@ -58,9 +58,15 @@ export const translations = {
       seeFull: 'Open the full system',
     },
     projects: {
-      title: 'Three things I built and shipped',
+      title: 'Five things I built and shipped',
       open: 'Open it',
       items: [
+        {
+          status: 'Live',
+          artLabel: 'Real tables. Real bills.',
+          title: 'Oliwka / Restaurant ordering system',
+          desc: 'A complete ordering system for a restaurant, running on Cloudflare Workers and a D1 database. Guests scan the code on their table and order without waiting for anyone; the kitchen gets a ticket screen, waiters get a floor plan with every open bill, and the owner gets takings, tips and per-shift reports. Removing an item from a bill writes a line to a journal the system has no function to erase. Allergens follow the fourteen EU categories, and the staff panel runs in Polish, English and Ukrainian.',
+        },
         {
           status: 'Live',
           artLabel: 'Real dates. Real rooms.',
@@ -78,6 +84,12 @@ export const translations = {
           artLabel: 'Real answers. Real time.',
           title: 'Northgate / AI support chatbot',
           desc: "An embeddable support chatbot that drops onto any website with one script tag. It answers only from the business's own knowledge base, politely declines everything else, and routes emergencies to the phone. Replies stream in live, the API key stays server-side in a Vercel function, and the widget renders in a shadow root so the host page's CSS cannot touch it.",
+        },
+        {
+          status: 'Live',
+          artLabel: 'Real steps. Checked links.',
+          title: 'Delete Anything / account deletion guides',
+          desc: 'A reference site covering how to close an account on 61 platforms, plus what people need on the way out: a data-export checklist, how long each service actually takes to erase you, and templates. No framework and no dependencies — a build script I wrote generates the site, validates the HTML and follows every outbound link before anything ships, so a guide never sends you to a page that moved.',
         },
       ],
     },
@@ -157,7 +169,7 @@ export const translations = {
     },
     sections: {
       work: 'Ishlar',
-      workDatum: '3 ta mahsulot / barchasi jonli',
+      workDatum: '5 ta mahsulot / barchasi jonli',
       capability: "Ko'nikmalar",
       capabilityDatum: 'Men nima qilaman',
       profile: 'Profil',
@@ -168,7 +180,7 @@ export const translations = {
     hero: {
       headline1: "Ko'pchilik portfolioda skrinshot ko'rsatadi.",
       headline2: 'Meniki ishlaydi.',
-      sub: "Uchta mahsulot hozir ishlab turibdi: haqiqiy bandlikni hal qiladigan bron tizimi, haqiqiy karta to'lovlarini qabul qiladigan do'kon va haqiqiy bilimlar bazasidan javob beradigan yordam boti. Quyidagi panel — o'sha bron tizimi. Bir necha kecha tanlab ko'ring.",
+      sub: "Beshta mahsulot hozir ishlab turibdi: oshxona, zal va egasi uchun alohida ekranlari bo'lgan restoran buyurtma tizimi, haqiqiy bandlikni hal qiladigan bron tizimi, haqiqiy karta to'lovlarini qabul qiladigan do'kon, haqiqiy bilimlar bazasidan javob beradigan yordam boti va 61 ta platformani qamrab olgan ma'lumot sayti. Quyidagi panel — o'sha bron tizimi. Bir necha kecha tanlab ko'ring.",
       viewWork: "Ishlarni ko'rish",
       downloadCv: 'CV',
       bookCall: 'Suhbat belgilash',
@@ -192,9 +204,15 @@ export const translations = {
       seeFull: "To'liq tizimni ochish",
     },
     projects: {
-      title: 'Men yaratgan va ishga tushirgan uchta narsa',
+      title: 'Men yaratgan va ishga tushirgan beshta narsa',
       open: 'Ochish',
       items: [
+        {
+          status: 'Jonli',
+          artLabel: 'Haqiqiy stollar. Haqiqiy hisoblar.',
+          title: 'Oliwka / restoran buyurtma tizimi',
+          desc: "Cloudflare Workers va D1 ma'lumotlar bazasida ishlaydigan to'liq restoran buyurtma tizimi. Mehmon stolidagi kodni skanerlaydi va hech kimni kutmasdan buyurtma beradi; oshxona chek ekranini, ofitsiantlar barcha ochiq hisoblari bilan zal sxemasini, egasi esa tushum, choychaqa va har bir smena bo'yicha hisobotlarni oladi. Hisobdan pozitsiya olib tashlansa, jurnalga yozuv tushadi — tizimda uni o'chiradigan funksiya yo'q. Allergenlar Yevropa Ittifoqining o'n to'rtta toifasiga muvofiq, xodimlar paneli esa polyak, ingliz va ukrain tillarida ishlaydi.",
+        },
         {
           status: 'Jonli',
           artLabel: 'Haqiqiy sanalar. Haqiqiy xonalar.',
@@ -212,6 +230,12 @@ export const translations = {
           artLabel: 'Haqiqiy javoblar. Real vaqtda.',
           title: 'Northgate / AI yordam chatboti',
           desc: "Bitta skript tegi bilan istalgan saytga o'rnatiladigan yordam chatboti. U faqat biznesning o'z bilimlar bazasidan javob beradi — xizmatlar, narxlar, ish vaqti — qolgan savollarni xushmuomalalik bilan rad etadi va shoshilinch holatlarda telefon raqamini beradi. Javoblar jonli oqim tarzida keladi, API kalit Vercel funksiyasida server tomonida qoladi, vidjet esa shadow DOM ichida ishlaydi — saytning CSS'i unga ta'sir qila olmaydi.",
+        },
+        {
+          status: 'Jonli',
+          artLabel: 'Haqiqiy qadamlar. Tekshirilgan havolalar.',
+          title: "Delete Anything / akkauntni o'chirish bo'yicha qo'llanmalar",
+          desc: "61 ta platformada akkauntni qanday yopish kerakligini tushuntiradigan ma'lumot sayti, shuningdek ketishdan oldin kerak bo'ladigan narsalar: ma'lumotlarni yuklab olish ro'yxati, har bir xizmat sizni qancha vaqtda o'chirishi va shablonlar. Freymvork ham, tashqi kutubxona ham yo'q — o'zim yozgan skript saytni yig'adi, HTML'ni tekshiradi va e'lon qilishdan oldin har bir tashqi havolani ochib ko'radi, shunda qo'llanma ko'chib ketgan sahifaga yo'naltirmaydi.",
         },
       ],
     },
@@ -298,7 +322,7 @@ export const translations = {
     },
     sections: {
       work: 'Prace',
-      workDatum: '3 produkty / wszystkie działają',
+      workDatum: '5 produktów / wszystkie działają',
       capability: 'Umiejętności',
       capabilityDatum: 'Co realnie robię',
       profile: 'Profil',
@@ -309,7 +333,7 @@ export const translations = {
     hero: {
       headline1: 'Większość portfolio pokazuje zrzuty ekranu.',
       headline2: 'Moje działa.',
-      sub: 'Trzy produkty działają w tej chwili: silnik rezerwacji, który naprawdę rozwiązuje konflikty, sklep przyjmujący prawdziwe płatności kartą i bot wsparcia odpowiadający z prawdziwej bazy wiedzy. Panel poniżej to ten silnik rezerwacji. Wybierz kilka nocy.',
+      sub: 'Pięć produktów działa w tej chwili: system zamówień dla restauracji z osobnymi ekranami kuchni, sali i właściciela, silnik rezerwacji, który naprawdę rozwiązuje konflikty, sklep przyjmujący prawdziwe płatności kartą, bot wsparcia odpowiadający z prawdziwej bazy wiedzy i serwis opisujący 61 platform. Panel poniżej to ten silnik rezerwacji. Wybierz kilka nocy.',
       viewWork: 'Zobacz prace',
       downloadCv: 'CV',
       bookCall: 'Umów rozmowę',
@@ -333,9 +357,15 @@ export const translations = {
       seeFull: 'Otwórz pełny system',
     },
     projects: {
-      title: 'Trzy rzeczy, które zbudowałem i wdrożyłem',
+      title: 'Pięć rzeczy, które zbudowałem i wdrożyłem',
       open: 'Otwórz',
       items: [
+        {
+          status: 'Działa',
+          artLabel: 'Prawdziwe stoliki. Prawdziwe rachunki.',
+          title: 'Oliwka / system zamówień dla restauracji',
+          desc: 'Kompletny system zamawiania dla restauracji, działający na Cloudflare Workers i bazie D1. Gość skanuje kod na swoim stoliku i zamawia, nie czekając na nikogo; kuchnia dostaje ekran z bonami, kelnerzy plan sali ze wszystkimi otwartymi rachunkami, a właściciel utarg, napiwki i raporty z każdej zmiany. Zdjęcie pozycji z rachunku zapisuje wpis w dzienniku, którego system nie ma jak skasować. Alergeny zgodnie z czternastoma kategoriami unijnymi, a panel personelu działa po polsku, angielsku i ukraińsku.',
+        },
         {
           status: 'Działa',
           artLabel: 'Prawdziwe daty. Prawdziwe pokoje.',
@@ -353,6 +383,12 @@ export const translations = {
           artLabel: 'Prawdziwe odpowiedzi. Na żywo.',
           title: 'Northgate / czatbot wsparcia AI',
           desc: 'Czatbot wsparcia, który dodaje się do dowolnej strony jednym tagiem skryptu. Odpowiada wyłącznie na podstawie bazy wiedzy firmy — usługi, ceny, godziny otwarcia — grzecznie odmawia pozostałych pytań, a w nagłych przypadkach kieruje do telefonu. Odpowiedzi przychodzą strumieniowo na żywo, klucz API zostaje po stronie serwera w funkcji Vercel, a widget działa w shadow DOM, więc CSS strony go nie dotyka.',
+        },
+        {
+          status: 'Działa',
+          artLabel: 'Prawdziwe kroki. Sprawdzone linki.',
+          title: 'Delete Anything / poradniki usuwania kont',
+          desc: 'Serwis opisujący, jak zamknąć konto na 61 platformach, plus to, czego człowiek potrzebuje przy wyjściu: lista rzeczy do pobrania przed usunięciem, ile naprawdę trwa skasowanie w każdym serwisie i gotowe szablony. Bez frameworka i bez zależności — napisany przeze mnie skrypt buduje cały serwis, sprawdza HTML i otwiera każdy link wychodzący przed publikacją, żeby poradnik nie prowadził na stronę, która się przeniosła.',
         },
       ],
     },
@@ -438,7 +474,7 @@ export const translations = {
     },
     sections: {
       work: 'Работы',
-      workDatum: '3 продукта / все онлайн',
+      workDatum: '5 продуктов / все онлайн',
       capability: 'Навыки',
       capabilityDatum: 'Что я реально делаю',
       profile: 'Профиль',
@@ -449,7 +485,7 @@ export const translations = {
     hero: {
       headline1: 'Обычно в портфолио показывают скриншоты.',
       headline2: 'У меня всё работает.',
-      sub: 'Три продукта работают прямо сейчас: движок бронирования, который реально разрешает конфликты, магазин с настоящей оплатой картой и бот поддержки, отвечающий по реальной базе знаний. Панель ниже — это тот самый движок бронирования. Выберите несколько ночей.',
+      sub: 'Пять продуктов работают прямо сейчас: система заказов для ресторана с отдельными экранами кухни, зала и владельца, движок бронирования, который реально разрешает конфликты, магазин с настоящей оплатой картой, бот поддержки, отвечающий по реальной базе знаний, и справочный сайт по 61 платформе. Панель ниже — это тот самый движок бронирования. Выберите несколько ночей.',
       viewWork: 'Смотреть работы',
       downloadCv: 'Резюме',
       bookCall: 'Записаться на звонок',
@@ -473,9 +509,15 @@ export const translations = {
       seeFull: 'Открыть систему',
     },
     projects: {
-      title: 'Три вещи, которые я построил и запустил',
+      title: 'Пять вещей, которые я построил и запустил',
       open: 'Открыть',
       items: [
+        {
+          status: 'Онлайн',
+          artLabel: 'Реальные столики. Реальные счета.',
+          title: 'Oliwka / система заказов для ресторана',
+          desc: 'Полноценная система заказов для ресторана на Cloudflare Workers и базе D1. Гость сканирует код на своём столике и заказывает, никого не дожидаясь; кухня получает экран с заказами, официанты — план зала со всеми открытыми счетами, а владелец — выручку, чаевые и отчёты по каждой смене. Снятие позиции со счёта пишет строку в журнал, стереть которую в системе нечем. Аллергены по четырнадцати категориям ЕС, а панель персонала работает на польском, английском и украинском.',
+        },
         {
           status: 'Онлайн',
           artLabel: 'Реальные даты. Реальные номера.',
@@ -493,6 +535,12 @@ export const translations = {
           artLabel: 'Реальные ответы. В реальном времени.',
           title: 'Northgate / ИИ-чатбот поддержки',
           desc: 'Встраиваемый чат-бот поддержки, который добавляется на любой сайт одним тегом скрипта. Он отвечает только по базе знаний бизнеса — услуги, цены, часы работы — вежливо отклоняет всё остальное, а в экстренных случаях направляет к телефону. Ответы приходят потоком в реальном времени, ключ API остаётся на сервере в функции Vercel, а виджет работает в shadow DOM, поэтому CSS сайта на него не влияет.',
+        },
+        {
+          status: 'Онлайн',
+          artLabel: 'Реальные шаги. Проверенные ссылки.',
+          title: 'Delete Anything / руководства по удалению аккаунтов',
+          desc: 'Справочный сайт о том, как закрыть аккаунт на 61 платформе, плюс всё, что нужно на выходе: список данных, которые стоит выгрузить заранее, сколько на самом деле занимает удаление в каждом сервисе, и готовые шаблоны. Без фреймворка и без зависимостей — написанный мной скрипт собирает сайт, проверяет HTML и открывает каждую внешнюю ссылку перед публикацией, чтобы руководство не вело на переехавшую страницу.',
         },
       ],
     },
