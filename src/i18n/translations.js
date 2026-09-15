@@ -242,7 +242,7 @@ export const translations = {
   },
 
   pl: {
-    meta: { role: 'Junior Software Engineer' },
+    meta: { role: 'Młodszy inżynier oprogramowania' },
     downloadCv: 'Pobierz CV',
     nav: {
       home: 'Start',
@@ -363,7 +363,7 @@ export const translations = {
   },
 
   ru: {
-    meta: { role: 'Junior Software Engineer' },
+    meta: { role: 'Младший инженер-программист' },
     downloadCv: 'Скачать резюме',
     nav: {
       home: 'Главная',

@@ -38,6 +38,6 @@ The domain is registered on **Cloudflare** and connected to Vercel:
 ## Tech
 
 - **React + Vite** — component architecture and optimized production build
-- **Custom JavaScript** — interactive availability engine and language/theme controls
+- **Custom JavaScript** — interactive availability engine and language controls
 - **Vercel Analytics** — lightweight production analytics
 - **Plain CSS** — custom responsive design system with reduced-motion support
