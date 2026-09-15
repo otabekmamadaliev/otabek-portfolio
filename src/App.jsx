@@ -6,7 +6,6 @@ import Hero from './components/Hero.jsx'
 import Projects from './components/Projects.jsx'
 import Skills from './components/Skills.jsx'
 import About from './components/About.jsx'
-import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
             <Projects />
             <Skills />
             <About />
-            <Contact />
           </main>
           <Footer />
         </div>

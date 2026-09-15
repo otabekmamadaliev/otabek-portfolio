@@ -24,10 +24,7 @@ function Hero() {
         </p>
 
         <div className="hero-actions rise" style={step(2)}>
-          <a className="btn btn-live" href="#contact">
-            {t.hero.bookCall}
-          </a>
-          <a className="btn" href="#projects">
+          <a className="btn btn-live" href="#projects">
             {t.hero.viewWork}
           </a>
           <a
@@ -38,6 +35,9 @@ function Hero() {
             rel="noreferrer"
           >
             {t.hero.downloadCv}
+          </a>
+          <a className="btn" href="mailto:contact@otabekmamadaliev.com">
+            {t.hero.emailMe}
           </a>
         </div>
 

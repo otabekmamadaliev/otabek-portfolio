@@ -1,6 +1,6 @@
-# Otabek — Web Developer Portfolio
+# Otabek — Software Engineer Portfolio
 
-A fast, single-page portfolio site built with React + Vite, Framer Motion, and a working booking/contact form powered by EmailJS (no backend server needed). Dark purple-neon design with a fixed sidebar nav.
+A fast, multilingual single-page portfolio positioning Otabek as a junior software engineer. It presents five deployed products, an interactive booking-engine module, technical capabilities, internship evidence, and a downloadable CV.
 
 **Live:** [otabekmamadaliev.com](https://otabekmamadaliev.com) (also at [otabekmamadaliev.vercel.app](https://otabekmamadaliev.vercel.app))
 
@@ -20,26 +20,6 @@ npm run build
 npm run preview   # serves the built site locally
 ```
 
-## EmailJS (the contact form)
-
-The booking form sends submissions straight to the inbox via [EmailJS](https://www.emailjs.com/) — frontend-only, no server. **It's already connected** — the live keys are in [src/components/Contact.jsx](src/components/Contact.jsx).
-
-If you ever need to reconnect it to a different account, redo these steps and replace the three constants at the top of that file (`SERVICE_ID`, `TEMPLATE_ID`, `PUBLIC_KEY`):
-
-1. **Create an account** at [emailjs.com](https://www.emailjs.com/) (free tier is fine).
-2. **Add an email service**: Dashboard → *Email Services* → *Add New Service* → choose **Gmail** and connect. Note the **Service ID**.
-3. **Create a template**: Dashboard → *Email Templates* → *Create New Template*. Use these variables (they match the form field names), and set `{{reply_to}}` as the template's Reply-To so replies go straight to the visitor:
-   - `{{from_name}}` — the visitor's name
-   - `{{reply_to}}` — the visitor's email
-   - `{{preferred_time}}` — their preferred call time
-   - `{{message}}` — what they need built
-
-   Note the **Template ID**.
-4. **Get your Public Key**: Dashboard → *Account* → *General* → **Public Key**.
-5. Paste the three values into [src/components/Contact.jsx](src/components/Contact.jsx) and test — you should receive an email within seconds.
-
-> Note: these three IDs are public identifiers, not secrets — they ship in the browser bundle, so committing them is expected. To stop them being reused to spam the inbox from other sites, restrict allowed origins in EmailJS (*Account → Security → Allowed origins*) and rotate the public key if it's ever abused.
-
 ## Deploy
 
 Hosted on **Vercel**, connected to this repo — **every push to `main` auto-deploys**. To reproduce from scratch:
@@ -57,7 +37,7 @@ The domain is registered on **Cloudflare** and connected to Vercel:
 
 ## Tech
 
-- **React + Vite** — fast dev server and optimized production bundle
-- **Framer Motion** — hero stagger, scroll reveals, and the looping build-log animation
-- **@emailjs/browser** — contact form email delivery, no backend
-- **Plain CSS** — custom design system with CSS variables, responsive, respects `prefers-reduced-motion`
+- **React + Vite** — component architecture and optimized production build
+- **Custom JavaScript** — interactive availability engine and language/theme controls
+- **Vercel Analytics** — lightweight production analytics
+- **Plain CSS** — custom responsive design system with reduced-motion support
