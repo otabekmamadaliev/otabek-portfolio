@@ -2,7 +2,7 @@ import Reveal from './Reveal.jsx'
 import SectionHead from './SectionHead.jsx'
 import { useLang } from '../i18n/lang.jsx'
 
-const FACT_KEYS = ['based', 'studying', 'languages', 'reply']
+const FACT_KEYS = ['based', 'studying', 'experience', 'languages']
 
 function About() {
   const { t } = useLang()

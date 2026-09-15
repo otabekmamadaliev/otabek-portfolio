@@ -1082,7 +1082,9 @@ main {
 }
 
 .spec-note {
-  flex: none;
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-family: var(--f-mono);
   font-size: 0.58rem;
   letter-spacing: 0.06em;

@@ -7,7 +7,6 @@ const NAV = [
   { key: 'projects', href: '#projects' },
   { key: 'skills', href: '#skills' },
   { key: 'about', href: '#about' },
-  { key: 'contact', href: '#contact' },
 ]
 
 // The products that are actually deployed and serving traffic.
@@ -66,8 +65,7 @@ function ProfileRow() {
   )
 }
 
-// Where I actually am, so a client in another timezone knows whether it is
-// a reasonable hour to call.
+// A small location signal for recruiters and teams working across time zones.
 function Clock() {
   const { t } = useLang()
   const [now, setNow] = useState(() => new Date())
@@ -135,8 +133,8 @@ function Rail() {
           <Clock />
           <LanguageSwitcher />
           <ProfileRow />
-          <a className="btn btn-live btn-sm" href="#contact">
-            {t.bookCall}
+          <a className="btn btn-live btn-sm" href="/Otabek_Mamadaliev_CV.pdf" download>
+            {t.downloadCv}
           </a>
         </div>
       </aside>
@@ -147,8 +145,8 @@ function Rail() {
         </a>
         <div className="topbar-right">
           <LanguageSwitcher />
-          <a className="btn btn-live btn-sm" href="#contact">
-            {t.bookCall}
+          <a className="btn btn-live btn-sm" href="/Otabek_Mamadaliev_CV.pdf" download>
+            {t.downloadCv}
           </a>
         </div>
       </header>
